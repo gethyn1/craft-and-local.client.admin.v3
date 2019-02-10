@@ -1,0 +1,33 @@
+{
+  "name": "craft-and-local.client.admin.v3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "parcel -p 8080 src/client/index.html",
+    "build": "parcel build src/client/index.js",
+    "test": "npm run test:lint",
+    "test:lint": "standard"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "install": "^0.12.2",
+    "npm": "^6.7.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-redux": "^6.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-react": "^7.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-react": "^7.0.2",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-standard": "^4.0.0",
+    "parcel-bundler": "^1.11.0"
+  }
+}
