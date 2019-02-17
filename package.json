@@ -7,11 +7,12 @@
     "start:dev": "parcel -p 8080 src/client/index.html",
     "build": "parcel build src/client/index.js",
     "test": "npm run test:lint",
-    "test:lint": "standard"
+    "test:lint": "eslint src --ext .js,.jsx"
   },
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
+    "history": "^4.7.2",
     "install": "^0.12.2",
     "npm": "^6.7.0",
     "react": "^16.8.1",

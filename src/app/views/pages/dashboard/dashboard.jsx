@@ -1,8 +1,16 @@
 import React from 'react'
+import { history } from '../../../history'
 
-const Dashboard = () => (
-  <p>This is the dashboard</p>
-)
+const handleClick = (event) => {
+  event.preventDefault()
+  history.push(event.currentTarget.pathname, {})
+}
+
+const Dashboard = () => {
+  return (
+    <p>This is the dashboard <a onClick={handleClick} href="/">Go to homepage</a></p>
+  )
+}
 
 export {
   Dashboard
