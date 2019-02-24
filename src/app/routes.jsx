@@ -3,6 +3,8 @@ import { Dashboard } from './views/pages/dashboard'
 
 const Homepage = () => <p>Homepage</p>
 
+const NotFound = () => <p>404</p>
+
 const routes = [
   {
     path: '/',
@@ -17,6 +19,13 @@ const routes = [
       console.log('Dashboard route action')
     },
     component: Dashboard
+  },
+  {
+    path: '/error',
+    action: () => {
+      console.log('Error route action')
+    },
+    component: NotFound
   }
 ]
 
