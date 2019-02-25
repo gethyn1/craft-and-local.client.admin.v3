@@ -1,7 +1,7 @@
-import { partial } from 'ramda'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { partial } from 'ramda'
 import { AppLayout } from '../app/views/layouts'
 import { store } from '../app/store'
 
@@ -19,7 +19,7 @@ const Root = ({ routeComponent }) => (
   </Provider>
 )
 
-const  renderComponent = (component) =>
+const renderComponent = (component) =>
   ReactDOM.render(
     <Root routeComponent={component} />,
     document.getElementById('root')

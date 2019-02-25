@@ -1,5 +1,7 @@
 import { createBrowserHistory } from 'history'
 
-module.exports = {
-  history: createBrowserHistory()
+const history = createBrowserHistory()
+
+export {
+  history
 }
