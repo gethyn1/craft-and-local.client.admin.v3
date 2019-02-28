@@ -26,5 +26,6 @@ const apiService = (store) => (next) => (action) => {
 }
 
 export {
+  CALL_API,
   apiService
 }
