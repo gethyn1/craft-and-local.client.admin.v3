@@ -8,8 +8,6 @@ const apiService = (store) => (next) => (action) => {
     return next(action)
   }
 
-  console.log('api service')
-
   const { types, endpoint } = apiType
   const [requestType, successType, failureType] = types
 
@@ -23,14 +21,8 @@ const apiService = (store) => (next) => (action) => {
 
       return response.json()
     })
-    .then((result) => {
-      if (!result.statusCode === 200) {
-        throw new Error(`Server error ${result.statusCode}`)
-      }
-
-      next({ type: successType, payload: result.data })
-    })
-    .catch((error) => next({ type: failureType, error: true, payload: error }))
+    .then((json) => next({ type: successType, payload: json.data }))
+    .catch(() => next({ type: failureType, error: true }))
 }
 
 export {
