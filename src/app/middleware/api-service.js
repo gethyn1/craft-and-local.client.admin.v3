@@ -11,7 +11,7 @@ const apiService = (store) => (next) => (action) => {
   const { types, endpoint } = apiType
   const [requestType, successType, failureType] = types
 
-  next({ type: requestType, payload: 'test' })
+  next({ type: requestType })
 
   return window.fetch(`${API_BASE}${endpoint}`)
     .then((response) => {

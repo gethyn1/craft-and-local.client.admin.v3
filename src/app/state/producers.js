@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux'
 import { CALL_API } from '../middleware/api-service'
 import { createReducer } from './create-reducer'
 
@@ -18,13 +19,49 @@ const fetchProducers = () => ({
   }
 })
 
-const handlers = {
+const entityHandlers = {
   [types.PRODUCERS_REQUEST_SUCCEEDED]: (state, action) => {
     return action.payload.producers
   }
 }
 
-const reducer = createReducer(['test'], handlers)
+const initialMetaState = {
+  isFetching: false,
+  hasLoaded: false,
+  hasErrored: false
+}
+
+const metaHandlers = {
+  [types.PRODUCERS_REQUESTED]: (state, action) => {
+    return {
+      ...state,
+      isFetching: true,
+      hasLoaded: false,
+      hasErrored: false
+    }
+  },
+  [types.PRODUCERS_REQUEST_SUCCEEDED]: (state, action) => {
+    return {
+      ...state,
+      isFetching: false,
+      hasLoaded: true,
+      hasErrored: false
+    }
+  },
+  [types.PRODUCERS_REQUEST_FAILED]: (state, action) => {
+    return {
+      ...state,
+      isFetching: false,
+      hasLoaded: false,
+      hasErrored: true
+    }
+  }
+}
+
+const reducer = combineReducers({
+  entities: createReducer([], entityHandlers),
+  meta: createReducer(initialMetaState, metaHandlers)
+})
 
 export const producers = {
   types,
