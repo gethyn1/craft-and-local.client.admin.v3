@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import { producers } from './producers'
+import { reducer as producers } from './producers'
 
 const rootReducer = combineReducers({
-  producers: producers.reducer
+  producers
 })
 
 export {

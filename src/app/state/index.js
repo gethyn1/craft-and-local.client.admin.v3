@@ -1,2 +1,7 @@
-export { rootReducer } from './root-reducer'
-export { producers, fetchProducers } from './producers'
+import * as producers from './producers'
+import { rootReducer } from './root-reducer'
+
+export {
+  rootReducer,
+  producers
+}

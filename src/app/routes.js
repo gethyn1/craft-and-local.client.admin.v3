@@ -17,7 +17,7 @@ const routes = [
   },
   {
     path: '/dashboard',
-    action: () => store.dispatch(producers.fetchProducers()),
+    action: () => store.dispatch(producers.actions.fetchProducers()),
     component: Dashboard
   },
   {

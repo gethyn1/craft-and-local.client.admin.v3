@@ -8,6 +8,44 @@ function createReducer (initialState, handlers) {
   }
 }
 
+const createFetchMetaReducer = ({ types }) => {
+  const initialState = {
+    isFetching: false,
+    hasLoaded: false,
+    hasErrored: false
+  }
+
+  const [requested, succeeded, failed] = types
+
+  return createReducer(initialState, {
+    [requested]: (state, action) => {
+      return {
+        ...state,
+        isFetching: true,
+        hasLoaded: false,
+        hasErrored: false
+      }
+    },
+    [succeeded]: (state, action) => {
+      return {
+        ...state,
+        isFetching: false,
+        hasLoaded: true,
+        hasErrored: false
+      }
+    },
+    [failed]: (state, action) => {
+      return {
+        ...state,
+        isFetching: false,
+        hasLoaded: false,
+        hasErrored: true
+      }
+    }
+  })
+}
+
 export {
-  createReducer
+  createReducer,
+  createFetchMetaReducer
 }
