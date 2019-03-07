@@ -12,7 +12,9 @@ const AppLayout = ({ children }) => (
       <Title style={{ color: '#fff' }}>Craft &amp; Local</Title>
     </Header>
     <Content style={{ padding: '0 50px' }}>
-      {children}
+      <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+        {children}
+      </div>
     </Content>
   </Layout>
 )
