@@ -1,5 +1,6 @@
 import React from 'react'
 import { history } from '../../../history'
+import { Producers } from './producers'
 
 const handleClick = (event) => {
   event.preventDefault()
@@ -8,7 +9,10 @@ const handleClick = (event) => {
 
 const Dashboard = () => {
   return (
-    <p>This is the dashboard <a onClick={handleClick} href="/">Go to homepage</a></p>
+    <React.Fragment>
+      <p>This is the dashboard <a onClick={handleClick} href="/">Go to homepage</a></p>
+      <Producers />
+    </React.Fragment>
   )
 }
 
