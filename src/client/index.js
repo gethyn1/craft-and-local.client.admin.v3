@@ -11,17 +11,17 @@ import { router } from '../app/router'
 
 const resolveRoute = partial(router.resolve, [routes])
 
-const Root = ({ routeComponent }) => (
+const Root = ({ RouteComponent }) => (
   <Provider store={store}>
     <AppLayout>
-      {routeComponent()}
+      <RouteComponent />
     </AppLayout>
   </Provider>
 )
 
 const renderComponent = (component) =>
   ReactDOM.render(
-    <Root routeComponent={component} />,
+    <Root RouteComponent={component} />,
     document.getElementById('root')
   )
 
