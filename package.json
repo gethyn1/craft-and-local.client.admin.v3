@@ -12,6 +12,7 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
+    "antd": "^3.14.1",
     "history": "^4.7.2",
     "install": "^0.12.2",
     "ramda": "^0.26.1",
