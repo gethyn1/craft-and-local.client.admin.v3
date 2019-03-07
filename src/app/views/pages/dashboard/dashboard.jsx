@@ -1,5 +1,5 @@
 import React from 'react'
-import { history } from '../../../history'
+import { Link } from '../../../components/link'
 
 const handleClick = (event) => {
   event.preventDefault()
@@ -9,7 +9,7 @@ const handleClick = (event) => {
 const Dashboard = () => {
   return (
     <React.Fragment>
-      <p>This is the dashboard <a onClick={handleClick} href="/">Go to homepage</a></p>
+      <p>This is the dashboard <Link path="/">Go to homepage</Link></p>
     </React.Fragment>
   )
 }
