@@ -8,7 +8,7 @@ const Producer = (producer) => (
   <List.Item>
     <Text>
       {producer.title}<br />
-      <Link path={producer.userId}>Edit</Link>
+      <Link path={`/producers/${producer.userId}`}>Edit</Link>
     </Text>
   </List.Item>
 )
