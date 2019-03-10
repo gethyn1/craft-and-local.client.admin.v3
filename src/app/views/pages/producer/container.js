@@ -1,7 +1,11 @@
 import { connect } from 'react-redux'
 import { Producer } from './producer'
 
-const container = connect(null, null)(Producer)
+const mapStateToProps = (state) => ({
+  ...state.producer
+})
+
+const container = connect(mapStateToProps, null)(Producer)
 
 export {
   container
