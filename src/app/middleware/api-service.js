@@ -12,7 +12,7 @@ const apiService = (store) => (next) => (action) => {
   const [requestType, successType, failureType] = types
 
   next({ type: requestType })
-
+  console.log(`${API_BASE}${endpoint}`)
   return window.fetch(`${API_BASE}${endpoint}`)
     .then((response) => {
       if (!response.ok) {

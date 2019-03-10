@@ -4,7 +4,7 @@ import { Producers } from './views/pages/producers'
 import { Producer } from './views/pages/producer'
 import { Homepage } from './views/pages/homepage'
 import { NotFound } from './views/pages/not-found'
-import { producers } from './state'
+import { producers, producer } from './state'
 
 const routes = [
   {
@@ -35,6 +35,7 @@ const routes = [
     path: '/producers/:userId',
     action: ({ match }) => {
       console.log('Producer route action. MATCH:', match)
+      store.dispatch(producer.actions.fetchProducer(match.userId))
     },
     component: Producer
   },
