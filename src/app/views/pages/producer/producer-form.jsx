@@ -23,7 +23,7 @@ class ProducerForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values', values)
-        this.props.onSubmit(this.props.id, this.props.producer)
+        this.props.onSubmit(this.props.producer.userId, this.props.updatedFields)
       }
     })
   }

@@ -6,6 +6,7 @@ import * as types from './types'
  * State shape
  * {
  *   entity: Array,
+ *   pendingEntityUpdates: Object,
  *   meta: Object<Fetch Meta>
  * }
  */
@@ -16,22 +17,17 @@ const entityHandlers = {
   }
 }
 
-const transientHandlers = {
-  [types.PRODUCER_REQUEST_SUCCEEDED]: (state, action) => {
-    return action.payload.producer
-  },
-  [types.PRODUCER_FIELD_UPDATED]: (state, action) => {
-    console.log('ACTION', action)
-    return {
-      ...state,
-      [action.payload.key]: action.payload.value
-    }
-  }
+const pendingEntityUpdatesHandlers = {
+  [types.PRODUCER_FIELD_UPDATED]: (state, action) => ({
+    ...state,
+    [action.payload.key]: action.payload.value
+  }),
+  [types.PRODUCER_PERSIST_REQUEST_SUCCEEDED]: (state, action) => ({})
 }
 
 const reducer = combineReducers({
   entity: createReducer(null, entityHandlers),
-  transient: createReducer(null, transientHandlers),
+  pendingEntityUpdates: createReducer({}, pendingEntityUpdatesHandlers),
   meta: createFetchMetaReducer({ types: [
     // TO DO: indicate that these are GET requests .. maybe??
     types.PRODUCER_REQUESTED,

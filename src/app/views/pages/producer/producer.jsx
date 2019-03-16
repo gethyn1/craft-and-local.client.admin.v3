@@ -5,12 +5,12 @@ import { WrappedForm } from './producer-form'
 
 const { Title } = Typography
 
-const Entity = ({ entity, transient, onFieldUpdate, onSubmit }) => (
+const Entity = ({ entity, pendingEntityUpdates, onFieldUpdate, onSubmit }) => (
   <React.Fragment>
     <Title>{entity.title}</Title>
     <WrappedForm
-      id={entity.userId}
-      producer={transient}
+      producer={entity}
+      updatedFields={pendingEntityUpdates}
       onFieldUpdate={onFieldUpdate}
       onSubmit={onSubmit}
     />
