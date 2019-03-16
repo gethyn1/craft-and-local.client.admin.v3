@@ -8,12 +8,20 @@ const apiService = (store) => (next) => (action) => {
     return next(action)
   }
 
-  const { types, endpoint } = apiType
+  const { types, endpoint, method, body } = apiType
   const [requestType, successType, failureType] = types
 
   next({ type: requestType })
-  console.log(`${API_BASE}${endpoint}`)
-  return window.fetch(`${API_BASE}${endpoint}`)
+
+  return window.fetch(
+    `${API_BASE}${endpoint}`,
+    {
+      method: method || 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body)
+    })
     .then((response) => {
       if (!response.ok) {
         throw new Error('Network response was not ok')
