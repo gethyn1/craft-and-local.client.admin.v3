@@ -1,5 +1,5 @@
 import React from 'react'
-import { reverse, toPairs, find, head, compose } from 'ramda'
+import { pick, last, toPairs, find, head, compose } from 'ramda'
 import { Skeleton, Alert } from 'antd'
 
 const ErrorAlert = () =>
@@ -20,9 +20,11 @@ const metaMap = ({
   hasLoaded: Component
 })
 
-const isActive = compose(Boolean, head, reverse)
+const pickMetaProps = pick(['isFetching', 'hasErrored', 'hasLoaded'])
 
-const getState = compose(head, find(isActive), toPairs)
+const isActive = compose(Boolean, last)
+
+const getState = compose(head, find(isActive), toPairs, pickMetaProps)
 
 const resolveMeta = ({ Component }) => (props) => {
   const state = getState(props.meta)
