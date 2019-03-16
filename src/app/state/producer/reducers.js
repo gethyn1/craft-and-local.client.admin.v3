@@ -16,8 +16,22 @@ const entityHandlers = {
   }
 }
 
+const transientHandlers = {
+  [types.PRODUCER_REQUEST_SUCCEEDED]: (state, action) => {
+    return action.payload.producer
+  },
+  [types.PRODUCER_FIELD_UPDATED]: (state, action) => {
+    console.log('ACTION', action)
+    return {
+      ...state,
+      [action.payload.key]: action.payload.value
+    }
+  }
+}
+
 const reducer = combineReducers({
   entity: createReducer(null, entityHandlers),
+  transient: createReducer(null, transientHandlers),
   meta: createFetchMetaReducer({ types: [
     // TO DO: indicate that these are GET requests .. maybe??
     types.PRODUCER_REQUESTED,

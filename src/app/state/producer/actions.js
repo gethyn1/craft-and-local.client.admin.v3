@@ -12,6 +12,26 @@ const fetchProducer = (id) => ({
   }
 })
 
+const updateField = ({ key, value }) => ({
+  type: types.PRODUCER_FIELD_UPDATED,
+  payload: { key, value }
+})
+
+const saveProducer = (id, body) => ({
+  [CALL_API]: {
+    endpoint: `/producers/${id}`,
+    method: 'POST',
+    body,
+    types: [
+      types.PRODUCER_PERSIST_REQUESTED,
+      types.PRODUCER_PERSIST_REQUEST_SUCCEEDED,
+      types.PRODUCER_PERSIST_REQUEST_FAILED
+    ]
+  }
+})
+
 export {
-  fetchProducer
+  fetchProducer,
+  updateField,
+  saveProducer
 }
