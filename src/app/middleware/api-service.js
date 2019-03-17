@@ -1,3 +1,6 @@
+import { message } from 'antd'
+import { path } from 'ramda'
+
 const API_BASE = 'http://localhost:5000'
 const CALL_API = 'CALL_API'
 
@@ -8,10 +11,16 @@ const apiService = (store) => (next) => (action) => {
     return next(action)
   }
 
-  const { types, endpoint, method, body } = apiType
+  const { types, endpoint, method, body, meta } = apiType
   const [requestType, successType, failureType] = types
 
+  const loadingMessage = path(['message', 'loading'], meta)
+  const successMessage =  path(['message', 'success'], meta)
+  const errorMessage = path(['message', 'error'], meta)
+
   next({ type: requestType })
+
+  const hideLoadingMessage = loadingMessage ? message.loading(loadingMessage, 0) : () => {}
 
   return window.fetch(
     `${API_BASE}${endpoint}`,
@@ -27,10 +36,17 @@ const apiService = (store) => (next) => (action) => {
         throw new Error('Network response was not ok')
       }
 
+      hideLoadingMessage()
       return response.json()
     })
-    .then((json) => next({ type: successType, payload: json.data }))
-    .catch(() => next({ type: failureType, error: true }))
+    .then((json) => {
+      successMessage && message.success(successMessage)
+      return next({ type: successType, payload: json.data })
+    })
+    .catch(() => {
+      errorMessage && message.success(errorMessage)
+      return next({ type: failureType, error: true })
+    })
 }
 
 export {

@@ -26,7 +26,14 @@ const saveProducer = (id, body) => ({
       types.PRODUCER_PERSIST_REQUESTED,
       types.PRODUCER_PERSIST_REQUEST_SUCCEEDED,
       types.PRODUCER_PERSIST_REQUEST_FAILED
-    ]
+    ],
+    meta: {
+      message: {
+        loading: 'Saving producer...',
+        success: 'Producer saved successfully!!',
+        error: 'Sorry .. there was an error saving the producer'
+      }
+    }
   }
 })
 
