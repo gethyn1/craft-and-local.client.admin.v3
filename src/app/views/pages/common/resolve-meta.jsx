@@ -1,6 +1,8 @@
 import React from 'react'
-import { pick, last, toPairs, find, head, compose } from 'ramda'
+import { path, pick, last, toPairs, find, head, compose } from 'ramda'
 import { Skeleton, Alert } from 'antd'
+
+const READ_PATH = ['meta', 'read']
 
 const ErrorAlert = () =>
   <Alert
@@ -24,10 +26,10 @@ const pickMetaProps = pick(['isFetching', 'hasErrored', 'hasLoaded'])
 
 const isActive = compose(Boolean, last)
 
-const getState = compose(head, find(isActive), toPairs, pickMetaProps)
+const getState = compose(head, find(isActive), toPairs, pickMetaProps, path(READ_PATH))
 
 const resolveMeta = ({ Component }) => (props) => {
-  const state = getState(props.meta)
+  const state = getState(props)
   const Render = metaMap({ Component })[state]
 
   return <Render {...props} />

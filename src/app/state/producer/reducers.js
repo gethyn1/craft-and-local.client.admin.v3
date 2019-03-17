@@ -28,12 +28,20 @@ const pendingEntityUpdatesHandlers = {
 const reducer = combineReducers({
   entity: createReducer(null, entityHandlers),
   pendingEntityUpdates: createReducer({}, pendingEntityUpdatesHandlers),
-  meta: createFetchMetaReducer({ types: [
-    // TO DO: indicate that these are GET requests .. maybe??
-    types.PRODUCER_REQUESTED,
-    types.PRODUCER_REQUEST_SUCCEEDED,
-    types.PRODUCER_REQUEST_FAILED
-  ] })
+  meta: combineReducers({
+    read: createFetchMetaReducer({ types: [
+      // TO DO: indicate that these are GET requests .. maybe??
+      types.PRODUCER_REQUESTED,
+      types.PRODUCER_REQUEST_SUCCEEDED,
+      types.PRODUCER_REQUEST_FAILED
+    ] }),
+    update: createFetchMetaReducer({ types: [
+      // TO DO: indicate that these are GET requests .. maybe??
+      types.PRODUCER_PERSIST_REQUESTED,
+      types.PRODUCER_PERSIST_REQUEST_SUCCEEDED,
+      types.PRODUCER_PERSIST_REQUEST_FAILED
+    ] })
+  })
 })
 
 export {
