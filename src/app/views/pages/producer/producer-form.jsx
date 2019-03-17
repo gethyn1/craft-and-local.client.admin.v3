@@ -48,6 +48,7 @@ class ProducerForm extends React.Component {
         </Form.Item>
         <Form.Item>
           <Button
+            loading={this.props.isUpdating}
             type="primary"
             htmlType="submit"
             disabled={hasErrors(getFieldsError())}

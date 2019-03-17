@@ -5,14 +5,15 @@ import { WrappedForm } from './producer-form'
 
 const { Title } = Typography
 
-const Entity = ({ entity, pendingEntityUpdates, onFieldUpdate, onSubmit }) => (
+const Entity = (props) => (
   <React.Fragment>
-    <Title>{entity.title}</Title>
+    <Title>{props.entity.title}</Title>
     <WrappedForm
-      producer={entity}
-      updatedFields={pendingEntityUpdates}
-      onFieldUpdate={onFieldUpdate}
-      onSubmit={onSubmit}
+      producer={props.entity}
+      updatedFields={props.pendingEntityUpdates}
+      onFieldUpdate={props.onFieldUpdate}
+      onSubmit={props.onSubmit}
+      isUpdating={props.meta.update.isFetching}
     />
   </React.Fragment>
 )
