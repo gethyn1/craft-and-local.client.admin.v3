@@ -7,7 +7,6 @@ const hasErrors = (fieldsError) => {
 
 class ProducerForm extends React.Component {
   componentDidMount() {
-    // To disabled submit button at the beginning.
     this.props.form.validateFields()
   }
 
@@ -34,10 +33,7 @@ class ProducerForm extends React.Component {
 
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Form.Item
-          validateStatus={titleError ? 'error' : ''}
-          help={titleError || ''}
-        >
+        <Form.Item validateStatus={titleError ? 'error' : ''} help={titleError || ''}>
           {getFieldDecorator('title', {
             rules: [{ required: true, message: 'Please input your title!' }],
             onChange: this.handleChange,
@@ -61,6 +57,10 @@ class ProducerForm extends React.Component {
   }
 }
 
+/**
+ * TO DO: make better use of Form.create API e.g. implement onFieldsChange()
+ * for updating redux store.
+ */
 const WrappedForm = Form.create({ name: 'producer_form' })(ProducerForm)
 
 export {
