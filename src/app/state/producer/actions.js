@@ -12,9 +12,9 @@ const fetchProducer = (id) => ({
   }
 })
 
-const updateField = ({ key, value }) => ({
+const updateField = (field) => ({
   type: types.PRODUCER_FIELD_UPDATED,
-  payload: { key, value }
+  payload: field
 })
 
 const saveProducer = (id, body) => ({

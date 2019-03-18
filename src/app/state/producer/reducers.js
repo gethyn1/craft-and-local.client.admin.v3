@@ -20,9 +20,9 @@ const entityHandlers = {
 const pendingEntityUpdatesHandlers = {
   [types.PRODUCER_FIELD_UPDATED]: (state, action) => ({
     ...state,
-    [action.payload.key]: action.payload.value
+    ...action.payload
   }),
-  [types.PRODUCER_PERSIST_REQUEST_SUCCEEDED]: (state, action) => ({})
+  [types.PRODUCER_PERSIST_REQUEST_SUCCEEDED]: () => ({})
 }
 
 const reducer = combineReducers({

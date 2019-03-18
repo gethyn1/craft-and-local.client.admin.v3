@@ -7,7 +7,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onFieldUpdate: ({ key, value }) => dispatch(producer.actions.updateField({ key, value })),
+  onFieldUpdate: (field) => dispatch(producer.actions.updateField(field)),
   onSubmit: (userId, fields) => dispatch(producer.actions.saveProducer(userId, fields))
 })
 

@@ -12,8 +12,7 @@ class ProducerForm extends React.Component {
 
   handleChange = (e) => {
     this.props.onFieldUpdate({
-      key: e.target.name,
-      value: e.target.value
+      [e.target.name]: e.target.value
     })
   }
 
