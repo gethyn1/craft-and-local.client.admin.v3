@@ -22,7 +22,7 @@ const pendingEntityUpdatesHandlers = {
     ...state,
     ...action.payload
   }),
-  [types.PRODUCER_PERSIST_REQUEST_SUCCEEDED]: () => ({})
+  [types.PRODUCER_UPDATE_REQUEST_SUCCEEDED]: () => ({})
 }
 
 const reducer = combineReducers({
@@ -30,16 +30,14 @@ const reducer = combineReducers({
   pendingEntityUpdates: createReducer({}, pendingEntityUpdatesHandlers),
   meta: combineReducers({
     read: createFetchMetaReducer({ types: [
-      // TO DO: indicate that these are GET requests .. maybe??
       types.PRODUCER_REQUESTED,
       types.PRODUCER_REQUEST_SUCCEEDED,
       types.PRODUCER_REQUEST_FAILED
     ] }),
     update: createFetchMetaReducer({ types: [
-      // TO DO: indicate that these are GET requests .. maybe??
-      types.PRODUCER_PERSIST_REQUESTED,
-      types.PRODUCER_PERSIST_REQUEST_SUCCEEDED,
-      types.PRODUCER_PERSIST_REQUEST_FAILED
+      types.PRODUCER_UPDATE_REQUESTED,
+      types.PRODUCER_UPDATE_REQUEST_SUCCEEDED,
+      types.PRODUCER_UPDATE_REQUEST_FAILED
     ] })
   })
 })
