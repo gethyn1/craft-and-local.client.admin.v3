@@ -17,12 +17,12 @@ const metaMap = ({
   Error = ErrorAlert,
   Component
 }) => ({
-  isFetching: Loading,
+  isLoading: Loading,
   hasErrored: Error,
   hasLoaded: Component
 })
 
-const pickMetaProps = pick(['isFetching', 'hasErrored', 'hasLoaded'])
+const pickMetaProps = pick(['isLoading', 'hasErrored', 'hasLoaded'])
 
 const isActive = compose(Boolean, last)
 

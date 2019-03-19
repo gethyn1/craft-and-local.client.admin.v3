@@ -13,7 +13,7 @@ const Entity = (props) => (
       updatedFields={props.pendingEntityUpdates}
       onFieldUpdate={props.onFieldUpdate}
       onSubmit={props.onSubmit}
-      isUpdating={props.meta.update.isFetching}
+      isUpdating={props.meta.update.isLoading}
     />
   </React.Fragment>
 )

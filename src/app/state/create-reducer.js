@@ -10,7 +10,7 @@ function createReducer (initialState, handlers) {
 
 const createFetchMetaReducer = ({ types }) => {
   const initialState = {
-    isFetching: false,
+    isLoading: false,
     hasLoaded: false,
     hasErrored: false
   }
@@ -21,7 +21,7 @@ const createFetchMetaReducer = ({ types }) => {
     [requested]: (state, action) => {
       return {
         ...state,
-        isFetching: true,
+        isLoading: true,
         hasLoaded: false,
         hasErrored: false
       }
@@ -29,7 +29,7 @@ const createFetchMetaReducer = ({ types }) => {
     [succeeded]: (state, action) => {
       return {
         ...state,
-        isFetching: false,
+        isLoading: false,
         hasLoaded: true,
         hasErrored: false
       }
@@ -37,7 +37,7 @@ const createFetchMetaReducer = ({ types }) => {
     [failed]: (state, action) => {
       return {
         ...state,
-        isFetching: false,
+        isLoading: false,
         hasLoaded: false,
         hasErrored: true
       }
