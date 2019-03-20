@@ -7,7 +7,10 @@ import * as types from './types'
  * {
  *   entity: Array,
  *   pendingEntityUpdates: Object,
- *   meta: Object<Fetch Meta>
+ *   meta: {
+ *     read: Object<Fetch Meta>,
+ *     update: Object<Fetch Meta>
+ *   }
  * }
  */
 
