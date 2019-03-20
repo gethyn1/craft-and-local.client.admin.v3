@@ -7,7 +7,7 @@
     "start:dev": "parcel -p 8080 src/client/index.html",
     "build": "parcel build src/client/index.js",
     "test": "npm run test:lint && test:unit",
-    "test:unit": "babel-tape-runner -r ./src/test/unit/setup src/**/*.test.js",
+    "test:unit": "babel-tape-runner -r './src/test/unit/setup' './src/**/*.test.js'",
     "test:lint": "eslint src --ext .js,.jsx"
   },
   "author": "",
