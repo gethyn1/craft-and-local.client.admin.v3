@@ -1,5 +1,6 @@
 const namespace = 'producer'
 
+// TO DO: abstract async action types creation
 const PRODUCER_REQUESTED = `${namespace}/PRODUCER_REQUESTED`
 const PRODUCER_REQUEST_SUCCEEDED = `${namespace}/PRODUCER_REQUEST_SUCCEEDED`
 const PRODUCER_REQUEST_FAILED = `${namespace}/PRODUCER_REQUEST_FAILED`

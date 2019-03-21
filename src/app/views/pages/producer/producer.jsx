@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography } from 'antd'
-import { resolveMeta } from '../common'
+import { resolveComponentByMetaState } from '../common'
 import { WrappedForm } from './producer-form'
 
 const { Title } = Typography
@@ -18,7 +18,7 @@ const Entity = (props) => (
   </React.Fragment>
 )
 
-const Producer = resolveMeta({ Component: Entity })
+const Producer = resolveComponentByMetaState(Entity)
 
 export {
   Producer

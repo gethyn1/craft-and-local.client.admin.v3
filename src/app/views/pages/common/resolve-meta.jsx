@@ -3,16 +3,30 @@ import { path, pick, last, toPairs, find, head, compose } from 'ramda'
 import { Skeleton, Alert } from 'antd'
 
 const READ_PATH = ['meta', 'read']
+const META_PROPS = ['isLoading', 'hasLoaded', 'hasErrored']
+
+const getReadPath = path(READ_PATH)
+
+const pickMetaProps = pick(META_PROPS)
+
+const getActivePair = compose(find(last), toPairs)
+
+const getActiveProp = (meta) => {
+  const activePair = getActivePair(meta)
+  return activePair ? head(activePair) : null
+}
+
+const getMetaState = compose(getActiveProp, pickMetaProps)
 
 const ErrorAlert = () =>
-  <Alert
+<Alert
     message="Error"
     description="Oh no!! There was some kind of error"
     type="error"
     showIcon
-  />
+    />
 
-const metaMap = ({
+const mapComponentToState = ({
   Loading = Skeleton,
   Error = ErrorAlert,
   Component
@@ -22,19 +36,28 @@ const metaMap = ({
   hasLoaded: Component
 })
 
-const pickMetaProps = pick(['isLoading', 'hasErrored', 'hasLoaded'])
+const resolveComponentByMetaState = (Component) => (props) => {
+  const readMetaProp = getReadPath(props)
 
-const isActive = compose(Boolean, last)
+  // TO DO: This should use type checking or monad to guard against invalid props or state
+  //        without having to explicitly check for these errors
+  if (!readMetaProp) {
+    throw new Error(`Props must have shape "{ meta: { read: { ${META_PROPS.join(', ')} } }}"`)
+  }
 
-const getState = compose(head, find(isActive), toPairs, pickMetaProps, path(READ_PATH))
+  const state = getMetaState(readMetaProp)
 
-const resolveMeta = ({ Component }) => (props) => {
-  const state = getState(props)
-  const Render = metaMap({ Component })[state]
+  if (!state) {
+    throw new Error(`A valid state was not found for resolving component by meta`)
+  }
 
-  return <Render {...props} />
+  const Resolved = mapComponentToState({ Component })[state]
+
+  return <Resolved {...props} />
 }
 
 export {
-  resolveMeta
+  getActiveProp,
+  getMetaState,
+  resolveComponentByMetaState
 }

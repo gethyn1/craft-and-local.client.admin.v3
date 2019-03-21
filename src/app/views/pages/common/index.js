@@ -1,1 +1,1 @@
-export { resolveMeta } from './resolve-meta'
+export { resolveComponentByMetaState } from './resolve-meta'
