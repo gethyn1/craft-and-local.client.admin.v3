@@ -17,7 +17,7 @@ const apiService = (store) => (next) => (action) => {
   const [requestType, successType, failureType] = types
 
   const loadingMessage = path(['message', 'loading'], meta)
-  const successMessage =  path(['message', 'success'], meta)
+  const successMessage = path(['message', 'success'], meta)
   const errorMessage = path(['message', 'error'], meta)
 
   next({ type: requestType })
@@ -29,7 +29,7 @@ const apiService = (store) => (next) => (action) => {
     {
       method: method || 'GET',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(body)
     })
