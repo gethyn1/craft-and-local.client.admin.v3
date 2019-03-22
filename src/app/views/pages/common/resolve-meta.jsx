@@ -19,24 +19,20 @@ const getActiveProp = (meta) => {
 const getMetaState = compose(getActiveProp, pickMetaProps)
 
 const ErrorAlert = () =>
-<Alert
+  <Alert
     message="Error"
     description="Oh no!! There was some kind of error"
     type="error"
     showIcon
     />
 
-const mapComponentToState = ({
-  Loading = Skeleton,
-  Error = ErrorAlert,
-  Component
-}) => ({
+const mapComponentToState = ({ Component, Loading, Error }) => ({
   isLoading: Loading,
   hasErrored: Error,
   hasLoaded: Component
 })
 
-const resolveComponentByMetaState = (Component) => (props) => {
+const resolveComponentByMetaState = (Component, Loading = Skeleton, Error = ErrorAlert) => (props) => {
   const readMetaProp = getReadPath(props)
 
   // TO DO: This should use type checking or monad to guard against invalid props or state
@@ -51,7 +47,7 @@ const resolveComponentByMetaState = (Component) => (props) => {
     throw new Error(`A valid state was not found for resolving component by meta`)
   }
 
-  const Resolved = mapComponentToState({ Component })[state]
+  const Resolved = mapComponentToState({ Component, Loading, Error })[state]
 
   return <Resolved {...props} />
 }
