@@ -20,7 +20,6 @@ class ProducerForm extends React.Component {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values', values)
         this.props.onSubmit(this.props.producer.userId, this.props.updatedFields)
       }
     })
@@ -60,8 +59,8 @@ class ProducerForm extends React.Component {
  * TO DO: make better use of Form.create API e.g. implement onFieldsChange()
  * for updating redux store.
  */
-const WrappedForm = Form.create({ name: 'producer_form' })(ProducerForm)
+const WrappedProducerForm = Form.create({ name: 'producer_form' })(ProducerForm)
 
 export {
-  WrappedForm
+  WrappedProducerForm
 }

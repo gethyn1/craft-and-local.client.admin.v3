@@ -1,14 +1,13 @@
 import React from 'react'
 import { Typography } from 'antd'
-import { resolveComponentByMetaState } from '../common'
-import { WrappedForm } from './producer-form'
+import { WrappedProducerForm as ProducerForm } from './producer-form'
 
 const { Title } = Typography
 
-const Entity = (props) => (
+const Producer = (props) => (
   <React.Fragment>
     <Title>{props.entity.title}</Title>
-    <WrappedForm
+    <ProducerForm
       producer={props.entity}
       updatedFields={props.pendingEntityUpdates}
       onFieldUpdate={props.onFieldUpdate}
@@ -17,8 +16,6 @@ const Entity = (props) => (
     />
   </React.Fragment>
 )
-
-const Producer = resolveComponentByMetaState(Entity)
 
 export {
   Producer
