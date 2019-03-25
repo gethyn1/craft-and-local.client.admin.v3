@@ -1,8 +1,8 @@
 import React from 'react'
-import { Form, Input, Button, Checkbox } from 'antd'
+import { Form, Input, Button } from 'antd'
+import { Categories } from './categories'
 
 const { TextArea } = Input
-const CheckboxGroup = Checkbox.Group
 
 const hasErrors = (fieldsError) => {
   return Object.keys(fieldsError).some(field => fieldsError[field])
@@ -39,10 +39,6 @@ class ProducerForm extends React.Component {
     const titleError = isFieldTouched('title') && getFieldError('title')
     const userIdError = isFieldTouched('userId') && getFieldError('userId')
 
-    // TO DO: refactor to seperate component and use Grid to align
-    const categories = this.props.categories.map(category => ({ label: category.title, value: category._id }))
-    const selectedCategories = this.props.producer.categories
-
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Item label="Title" validateStatus={titleError ? 'error' : ''} help={titleError || ''}>
@@ -74,7 +70,11 @@ class ProducerForm extends React.Component {
             )}
         </Form.Item>
 
-        <CheckboxGroup options={categories} defaultValue={selectedCategories} onChange={this.onCategoryChange} />
+        <Categories
+          categories={this.props.categories}
+          defaultValue={this.props.producer.categories}
+          onChange={this.onCategoryChange}
+        />
 
         <Form.Item label="Instagram">
           {getFieldDecorator('instagramHandle', {
