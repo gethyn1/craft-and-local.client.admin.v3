@@ -4,7 +4,9 @@ import { producer } from '../../../state'
 import { resolveComponentByMetaState } from '../common'
 
 const mapStateToProps = (state) => ({
-  ...state.producer
+  ...state.producer,
+  // TO DO: use a selector to get entities
+  categories: state.categories.entities
 })
 
 const mapDispatchToProps = (dispatch) => ({

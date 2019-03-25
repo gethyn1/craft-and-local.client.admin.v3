@@ -1,7 +1,8 @@
 import React from 'react'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, Checkbox } from 'antd'
 
 const { TextArea } = Input
+const CheckboxGroup = Checkbox.Group
 
 const hasErrors = (fieldsError) => {
   return Object.keys(fieldsError).some(field => fieldsError[field])
@@ -10,6 +11,12 @@ const hasErrors = (fieldsError) => {
 class ProducerForm extends React.Component {
   componentDidMount() {
     this.props.form.validateFields()
+  }
+
+  onCategoryChange = (checkedValues) => {
+    this.props.onFieldUpdate({
+      categories: checkedValues
+    })
   }
 
   handleChange = (e) => {
@@ -32,6 +39,10 @@ class ProducerForm extends React.Component {
     const titleError = isFieldTouched('title') && getFieldError('title')
     const userIdError = isFieldTouched('userId') && getFieldError('userId')
 
+    // TO DO: refactor to seperate component and use Grid to align
+    const categories = this.props.categories.map(category => ({ label: category.title, value: category._id }))
+    const selectedCategories = this.props.producer.categories
+
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Item label="Title" validateStatus={titleError ? 'error' : ''} help={titleError || ''}>
@@ -51,7 +62,7 @@ class ProducerForm extends React.Component {
             initialValue: this.props.producer.userId
           })(
             <Input placeholder="Title" name="userId" />
-          )}
+            )}
         </Form.Item>
 
         <Form.Item label="Description">
@@ -60,8 +71,10 @@ class ProducerForm extends React.Component {
             initialValue: this.props.producer.description
           })(
             <TextArea placeholder="Description" name="description" rows={4} />
-          )}
+            )}
         </Form.Item>
+
+        <CheckboxGroup options={categories} defaultValue={selectedCategories} onChange={this.onCategoryChange} />
 
         <Form.Item label="Instagram">
           {getFieldDecorator('instagramHandle', {

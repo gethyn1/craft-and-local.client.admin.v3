@@ -13,6 +13,7 @@ const Producer = (props) => (
       onFieldUpdate={props.onFieldUpdate}
       onSubmit={props.onSubmit}
       isUpdating={props.meta.update.isLoading}
+      categories={props.categories}
     />
   </React.Fragment>
 )
