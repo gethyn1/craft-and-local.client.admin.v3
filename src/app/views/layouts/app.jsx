@@ -21,6 +21,7 @@ const AppLayout = ({ children }) => (
         style={{ lineHeight: '64px' }}
       >
         <Menu.Item key="producers"><Link path="/producers">Producers</Link></Menu.Item>
+        <Menu.Item key="categories"><Link path="/categories">Categories</Link></Menu.Item>
       </Menu>
     </Header>
     <Content style={{ padding: '0 50px' }}>

@@ -2,6 +2,7 @@ import { store } from './store'
 import { Dashboard } from './views/pages/dashboard'
 import { Producers } from './views/pages/producers'
 import { Producer } from './views/pages/producer'
+import { Categories } from './views/pages/categories'
 import { Homepage } from './views/pages/homepage'
 import { NotFound } from './views/pages/not-found'
 import { producers, producer, categories } from './state'
@@ -38,6 +39,13 @@ const routes = [
       store.dispatch(categories.actions.fetchCategories())
     },
     component: Producer
+  },
+  {
+    path: '/categories',
+    action: () => {
+      store.dispatch(categories.actions.fetchCategories())
+    },
+    component: Categories
   },
   {
     path: '/error',
