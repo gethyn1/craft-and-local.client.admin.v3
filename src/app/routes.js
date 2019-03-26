@@ -3,9 +3,10 @@ import { Dashboard } from './views/pages/dashboard'
 import { Producers } from './views/pages/producers'
 import { Producer } from './views/pages/producer'
 import { Categories } from './views/pages/categories'
+import { Category } from './views/pages/category'
 import { Homepage } from './views/pages/homepage'
 import { NotFound } from './views/pages/not-found'
-import { producers, producer, categories } from './state'
+import { producers, producer, categories, category } from './state'
 
 const routes = [
   {
@@ -46,6 +47,13 @@ const routes = [
       store.dispatch(categories.actions.fetchCategories())
     },
     component: Categories
+  },
+  {
+    path: '/categories/:id',
+    action: ({ match }) => {
+      store.dispatch(category.actions.fetchCategory(match.id))
+    },
+    component: Category
   },
   {
     path: '/error',
