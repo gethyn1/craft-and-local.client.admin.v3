@@ -38,15 +38,16 @@ const apiService = (store) => (next) => (action) => {
         throw new Error('Network response was not ok')
       }
 
-      hideLoadingMessage()
       return response.json()
     })
     .then((json) => {
+      hideLoadingMessage()
       successMessage && message.success(successMessage)
       return next({ type: successType, payload: json.data })
     })
     .catch(() => {
-      errorMessage && message.success(errorMessage)
+      hideLoadingMessage()
+      errorMessage && message.error(errorMessage)
       return next({ type: failureType, error: true })
     })
 }
