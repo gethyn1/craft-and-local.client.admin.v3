@@ -3,7 +3,7 @@ import { Dashboard } from './views/pages/dashboard'
 import { Producers } from './views/pages/producers'
 import { Producer } from './views/pages/producer'
 import { Categories } from './views/pages/categories'
-import { Category } from './views/pages/category'
+import { Update as UpdateCategory, Create as CreateCategory } from './views/pages/category'
 import { Homepage } from './views/pages/homepage'
 import { NotFound } from './views/pages/not-found'
 import { producers, producer, categories, category } from './state'
@@ -49,11 +49,18 @@ const routes = [
     component: Categories
   },
   {
+    path: '/categories/create',
+    action: () => {
+      console.log('Create a category')
+    },
+    component: CreateCategory
+  },
+  {
     path: '/categories/:id',
     action: ({ match }) => {
       store.dispatch(category.actions.fetchCategory(match.id))
     },
-    component: Category
+    component: UpdateCategory
   },
   {
     path: '/error',

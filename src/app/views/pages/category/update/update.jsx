@@ -1,10 +1,10 @@
 import React from 'react'
 import { Typography } from 'antd'
-import { WrappedCategoryForm as CategoryForm } from './category-form'
+import { WrappedCategoryForm as CategoryForm } from '../category-form'
 
 const { Title } = Typography
 
-const Category = (props) => (
+const Update = (props) => (
   <React.Fragment>
     <Title>{props.entity.title}</Title>
     <CategoryForm
@@ -18,5 +18,5 @@ const Category = (props) => (
 )
 
 export {
-  Category
+  Update
 }

@@ -18,11 +18,11 @@ const updateField = (field) => ({
 })
 
 // TO DO: abstract CALL_API into factory action, or validate schema in API service
-const createCategory = (id, body) => ({
+const createCategory = ({ fields }) => ({
   [CALL_API]: {
     endpoint: `/categories`,
     method: 'POST',
-    body,
+    body: fields,
     types: [
       types.CATEGORY_CREATE_REQUESTED,
       types.CATEGORY_CREATE_REQUEST_SUCCEEDED,
@@ -39,11 +39,11 @@ const createCategory = (id, body) => ({
 })
 
 // TO DO: abstract CALL_API into factory action, or validate schema in API service
-const saveCategory = (id, body) => ({
+const saveCategory = ({ id, fields }) => ({
   [CALL_API]: {
     endpoint: `/categories/${id}`,
     method: 'POST',
-    body,
+    body: fields,
     types: [
       types.CATEGORY_UPDATE_REQUESTED,
       types.CATEGORY_UPDATE_REQUEST_SUCCEEDED,

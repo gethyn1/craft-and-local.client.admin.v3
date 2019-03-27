@@ -1,4 +1,5 @@
 import React from 'react'
+import { path } from 'ramda'
 import { Form, Input, Button } from 'antd'
 
 const hasErrors = (fieldsError) => {
@@ -6,10 +7,6 @@ const hasErrors = (fieldsError) => {
 }
 
 class CategoryForm extends React.Component {
-  componentDidMount() {
-    this.props.form.validateFields()
-  }
-
   onCategoryChange = (checkedValues) => {
     this.props.onFieldUpdate({
       categories: checkedValues
@@ -26,7 +23,10 @@ class CategoryForm extends React.Component {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.onSubmit(this.props.category._id, this.props.updatedFields)
+        this.props.onSubmit({
+          id: path(['category', '_id'], this.props),
+          fields: path(['updatedFields'], this.props)
+        })
       }
     })
   }
@@ -42,7 +42,7 @@ class CategoryForm extends React.Component {
           {getFieldDecorator('title', {
             rules: [{ required: true, message: 'Title is required' }],
             onChange: this.handleChange,
-            initialValue: this.props.category.title
+            initialValue: path(['category', 'title'], this.props)
           })(
             <Input placeholder="Title" name="title" />
           )}
@@ -52,7 +52,7 @@ class CategoryForm extends React.Component {
           {getFieldDecorator('slug', {
             rules: [{ required: true, message: 'Slug is required' }],
             onChange: this.handleChange,
-            initialValue: this.props.category.slug
+            initialValue: path(['category', 'slug'], this.props)
           })(
             <Input placeholder="Slug" name="slug" />
             )}
@@ -77,7 +77,7 @@ class CategoryForm extends React.Component {
  * TO DO: make better use of Form.create API e.g. implement onFieldsChange()
  * for updating redux store.
  */
-const WrappedCategoryForm = Form.create({ name: 'producer_form' })(CategoryForm)
+const WrappedCategoryForm = Form.create({ name: 'category_form' })(CategoryForm)
 
 export {
   WrappedCategoryForm
