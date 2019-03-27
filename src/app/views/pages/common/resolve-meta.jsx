@@ -1,5 +1,5 @@
 import React from 'react'
-import { path, pick, last, toPairs, find, head, compose } from 'ramda'
+import { path, pick, last, toPairs, find, head, compose, isNil } from 'ramda'
 import { Skeleton, Alert } from 'antd'
 
 const READ_PATH = ['meta', 'read']
@@ -43,11 +43,11 @@ const resolveComponentByMetaState = (Component, Loading = Skeleton, Error = Erro
 
   const state = getMetaState(readMetaProp)
 
-  if (!state) {
-    throw new Error(`A valid state was not found for resolving component by meta`)
+  if (isNil(state)) {
+    throw new Error('A valid state was not found for resolving component by meta')
   }
 
-  const Resolved = mapComponentToState({ Component, Loading, Error })[state]
+  const Resolved = mapComponentToState({ Component, Loading, Error })[state] || Component
 
   return <Resolved {...props} />
 }
