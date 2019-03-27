@@ -32,6 +32,11 @@ const reducer = combineReducers({
   entity: createReducer(null, entityHandlers),
   pendingEntityUpdates: createReducer({}, pendingEntityUpdatesHandlers),
   meta: combineReducers({
+    create: createFetchMetaReducer({ types: [
+      types.CATEGORY_CREATE_REQUESTED,
+      types.CATEGORY_CREATE_REQUEST_SUCCEEDED,
+      types.CATEGORY_CREATE_REQUEST_FAILED
+    ] }),
     read: createFetchMetaReducer({ types: [
       types.CATEGORY_REQUESTED,
       types.CATEGORY_REQUEST_SUCCEEDED,

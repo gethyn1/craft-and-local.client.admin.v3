@@ -18,6 +18,27 @@ const updateField = (field) => ({
 })
 
 // TO DO: abstract CALL_API into factory action, or validate schema in API service
+const createCategory = (id, body) => ({
+  [CALL_API]: {
+    endpoint: `/categories`,
+    method: 'POST',
+    body,
+    types: [
+      types.CATEGORY_CREATE_REQUESTED,
+      types.CATEGORY_CREATE_REQUEST_SUCCEEDED,
+      types.CATEGORY_CREATE_REQUEST_FAILED
+    ],
+    meta: {
+      message: {
+        loading: 'Creating category...',
+        success: 'Category created successfully!!',
+        error: 'Sorry .. there was an error creating the category'
+      }
+    }
+  }
+})
+
+// TO DO: abstract CALL_API into factory action, or validate schema in API service
 const saveCategory = (id, body) => ({
   [CALL_API]: {
     endpoint: `/categories/${id}`,
@@ -41,5 +62,6 @@ const saveCategory = (id, body) => ({
 export {
   fetchCategory,
   updateField,
+  createCategory,
   saveCategory
 }
