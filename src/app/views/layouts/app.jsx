@@ -1,6 +1,7 @@
 import React from 'react'
 import { Layout, Typography, Menu } from 'antd'
 import { Link } from '../../components/link'
+import { ErrorBoundary } from './error-boundary'
 
 import 'antd/dist/antd.css'
 
@@ -26,7 +27,9 @@ const AppLayout = ({ children }) => (
     </Header>
     <Content style={{ padding: '0 50px' }}>
       <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
-        {children}
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
       </div>
     </Content>
   </Layout>
