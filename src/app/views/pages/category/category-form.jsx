@@ -6,6 +6,7 @@ const hasErrors = (fieldsError) => {
   return Object.keys(fieldsError).some(field => fieldsError[field])
 }
 
+// TO DO: format slug to kebab case
 class CategoryForm extends React.Component {
   onCategoryChange = (checkedValues) => {
     this.props.onFieldUpdate({

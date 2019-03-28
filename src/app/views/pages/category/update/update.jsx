@@ -4,15 +4,15 @@ import { WrappedCategoryForm as CategoryForm } from '../category-form'
 
 const { Title } = Typography
 
-const Update = (props) => (
+const Update = ({ category, pendingEntityUpdates, onFieldUpdate, onSubmit, meta }) => (
   <React.Fragment>
-    <Title>{props.entity.title}</Title>
+    <Title>Edit category</Title>
     <CategoryForm
-      category={props.entity}
-      updatedFields={props.pendingEntityUpdates}
-      onFieldUpdate={props.onFieldUpdate}
-      onSubmit={props.onSubmit}
-      isUpdating={props.meta.update.isLoading}
+      category={category}
+      updatedFields={pendingEntityUpdates}
+      onFieldUpdate={onFieldUpdate}
+      onSubmit={onSubmit}
+      isUpdating={meta.update.isLoading}
     />
   </React.Fragment>
 )

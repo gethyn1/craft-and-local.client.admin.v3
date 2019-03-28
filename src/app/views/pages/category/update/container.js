@@ -4,7 +4,9 @@ import { category } from '../../../../state'
 import { resolveComponentByMetaState } from '../../common'
 
 const mapStateToProps = (state) => ({
-  ...state.category
+  category: state.category.entity,
+  pendingEntityUpdates: state.category.pendingEntityUpdates,
+  meta: state.category.meta
 })
 
 const mapDispatchToProps = (dispatch) => ({
