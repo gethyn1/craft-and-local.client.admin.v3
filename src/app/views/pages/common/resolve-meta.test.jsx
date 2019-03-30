@@ -118,3 +118,22 @@ test('resolveComponentByMetaState() returns the correct component on error', (t)
   t.equal(wrapper.matchesElement(<Error />), true, 'returns the correct component on error')
   t.end()
 })
+
+test('resolveComponentByMetaState() returns the correct component when no active state', (t) => {
+  const Component = () => <p>My component</p>
+
+  const props = {
+    meta: {
+      read: {
+        isLoading: false,
+        hasLoaded: false,
+        hasErrored: false
+      }
+    }
+  }
+
+  const Result = resolveComponentByMetaState(Component)
+  const wrapper = shallow(<Result {...props} />)
+  t.equal(wrapper.matchesElement(<Component />), true, 'returns the correct component when no active state')
+  t.end()
+})

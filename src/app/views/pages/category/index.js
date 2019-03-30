@@ -1,2 +1,1 @@
-export { Update } from './update'
-export { Create } from './create'
+export { container as Category } from './container'

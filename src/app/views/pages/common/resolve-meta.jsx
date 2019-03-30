@@ -43,10 +43,6 @@ const resolveComponentByMetaState = (Component, Loading = Skeleton, Error = Erro
 
   const state = getMetaState(readMetaProp)
 
-  if (isNil(state)) {
-    throw new Error('A valid state was not found for resolving component by meta')
-  }
-
   const Resolved = mapComponentToState({ Component, Loading, Error })[state] || Component
 
   return <Resolved {...props} />

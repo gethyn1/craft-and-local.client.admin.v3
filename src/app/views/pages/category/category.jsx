@@ -1,22 +1,22 @@
 import React from 'react'
 import { Typography } from 'antd'
-import { WrappedCategoryForm as CategoryForm } from '../category-form'
+import { WrappedCategoryForm as CategoryForm } from './category-form'
 
 const { Title } = Typography
 
-const Update = ({ category, pendingEntityUpdates, onFieldUpdate, onSubmit, meta }) => (
+const Category = ({ title, category, pendingEntityUpdates, onFieldUpdate, onSubmit, meta }) => (
   <React.Fragment>
-    <Title>Edit category</Title>
+    <Title>{title}</Title>
     <CategoryForm
       category={category}
       updatedFields={pendingEntityUpdates}
       onFieldUpdate={onFieldUpdate}
       onSubmit={onSubmit}
-      isUpdating={meta.update.isLoading}
+      isUpdating={meta.update.isLoading || meta.create.isUpdating}
     />
   </React.Fragment>
 )
 
 export {
-  Update
+  Category
 }
