@@ -2,11 +2,12 @@ import React from 'react'
 import { path } from 'ramda'
 import { Form, Input, Button } from 'antd'
 
+const SLUG_MATCH = /^[0-9a-z-]+$/
+
 const hasErrors = (fieldsError) => {
   return Object.keys(fieldsError).some(field => fieldsError[field])
 }
 
-// TO DO: format slug to kebab case
 class CategoryForm extends React.Component {
   onCategoryChange = (checkedValues) => {
     this.props.onFieldUpdate({
@@ -51,7 +52,10 @@ class CategoryForm extends React.Component {
 
         <Form.Item label="Slug" validateStatus={slugError ? 'error' : ''} help={slugError || ''}>
           {getFieldDecorator('slug', {
-            rules: [{ required: true, message: 'Slug is required' }],
+            rules: [
+              { required: true, message: 'Slug is required' },
+              { pattern: SLUG_MATCH, message: 'Slug can only contain lowercase letters, numbers and dashes' }
+            ],
             onChange: this.handleChange,
             initialValue: path(['category', 'slug'], this.props)
           })(
