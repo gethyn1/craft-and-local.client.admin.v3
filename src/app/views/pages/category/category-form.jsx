@@ -33,7 +33,7 @@ class CategoryForm extends React.Component {
     })
   }
 
-  render() {
+  render () {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form
     const titleError = isFieldTouched('title') && getFieldError('title')
     const slugError = isFieldTouched('slug') && getFieldError('slug')
@@ -60,7 +60,7 @@ class CategoryForm extends React.Component {
             initialValue: path(['category', 'slug'], this.props)
           })(
             <Input placeholder="Slug" name="slug" />
-            )}
+          )}
         </Form.Item>
 
         <Form.Item>

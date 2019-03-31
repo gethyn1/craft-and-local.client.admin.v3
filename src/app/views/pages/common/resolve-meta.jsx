@@ -1,5 +1,5 @@
 import React from 'react'
-import { path, pick, last, toPairs, find, head, compose, isNil } from 'ramda'
+import { path, pick, last, toPairs, find, head, compose } from 'ramda'
 import { Skeleton, Alert } from 'antd'
 
 const READ_PATH = ['meta', 'read']
@@ -24,7 +24,7 @@ const ErrorAlert = () =>
     description="Oh no!! There was some kind of error"
     type="error"
     showIcon
-    />
+  />
 
 const mapComponentToState = ({ Component, Loading, Error }) => ({
   isLoading: Loading,

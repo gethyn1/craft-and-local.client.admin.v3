@@ -2,20 +2,20 @@ import React from 'react'
 import { Alert } from 'antd'
 
 class ErrorBoundary extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = { hasError: false }
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError () {
     return { hasError: true }
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch (error, info) {
     console.log('Error:', error, 'INFO:', info)
   }
 
-  render() {
+  render () {
     if (this.state.hasError) {
       return <Alert
         message="Error"

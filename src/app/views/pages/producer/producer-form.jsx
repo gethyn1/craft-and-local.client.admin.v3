@@ -9,7 +9,7 @@ const hasErrors = (fieldsError) => {
 }
 
 class ProducerForm extends React.Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.form.validateFields()
   }
 
@@ -34,7 +34,7 @@ class ProducerForm extends React.Component {
     })
   }
 
-  render() {
+  render () {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form
     const titleError = isFieldTouched('title') && getFieldError('title')
     const userIdError = isFieldTouched('userId') && getFieldError('userId')
@@ -58,7 +58,7 @@ class ProducerForm extends React.Component {
             initialValue: this.props.producer.userId
           })(
             <Input placeholder="Title" name="userId" />
-            )}
+          )}
         </Form.Item>
 
         <Form.Item label="Description">
@@ -67,7 +67,7 @@ class ProducerForm extends React.Component {
             initialValue: this.props.producer.description
           })(
             <TextArea placeholder="Description" name="description" rows={4} />
-            )}
+          )}
         </Form.Item>
 
         <Categories
