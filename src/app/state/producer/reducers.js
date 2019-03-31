@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { createReducer, createFetchMetaReducer } from '../create-reducer'
+import { createReducer, createCrudMetaReducer } from '../create-reducer'
 import * as types from './types'
 
 /**
@@ -31,9 +31,9 @@ const pendingEntityUpdatesHandlers = {
 const reducer = combineReducers({
   entity: createReducer(null, entityHandlers),
   pendingEntityUpdates: createReducer({}, pendingEntityUpdatesHandlers),
-  meta: combineReducers({
-    read: createFetchMetaReducer({ types: types.READ }),
-    update: createFetchMetaReducer({ types: types.UPDATE })
+  meta: createCrudMetaReducer({
+    read: types.READ,
+    update: types.UPDATE
   })
 })
 

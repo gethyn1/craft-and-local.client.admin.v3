@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { createReducer, createFetchMetaReducer } from '../create-reducer'
+import { createReducer, createCrudMetaReducer } from '../create-reducer'
 import * as types from './types'
 
 /**
@@ -20,9 +20,7 @@ const entityHandlers = {
 
 const reducer = combineReducers({
   entities: createReducer([], entityHandlers),
-  meta: combineReducers({
-    read: createFetchMetaReducer({ types: types.READ })
-  })
+  meta: createCrudMetaReducer({ read: types.READ })
 })
 
 export {

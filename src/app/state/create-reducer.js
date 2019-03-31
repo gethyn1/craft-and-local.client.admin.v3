@@ -1,3 +1,6 @@
+import { combineReducers } from 'redux'
+import { isNil } from 'ramda'
+
 function createReducer (initialState, handlers) {
   return function reducer (state = initialState, action) {
     if (handlers.hasOwnProperty(action.type)) {
@@ -9,6 +12,10 @@ function createReducer (initialState, handlers) {
 }
 
 const createFetchMetaReducer = ({ types }) => {
+  if (isNil(types)) {
+    return null
+  }
+
   const initialState = {
     isLoading: false,
     hasLoaded: false,
@@ -45,7 +52,17 @@ const createFetchMetaReducer = ({ types }) => {
   })
 }
 
+// TO DO: test createCrudMetaReducer()
+const createCrudMetaReducer = ({ create, read, update, remove }) =>
+  combineReducers({
+    create: createFetchMetaReducer({ types: create }),
+    read: createFetchMetaReducer({ types: read }),
+    update: createFetchMetaReducer({ types: update }),
+    remove: createFetchMetaReducer({ types: remove })
+  })
+
 export {
   createReducer,
-  createFetchMetaReducer
+  createFetchMetaReducer,
+  createCrudMetaReducer
 }
