@@ -13,7 +13,7 @@ import * as types from './types'
  */
 
 const entityHandlers = {
-  [types.CATEGORIES_REQUEST_SUCCEEDED]: (state, action) => {
+  [types.READ_CATEGORIES_SUCCEEDED]: (state, action) => {
     return action.payload.categories
   }
 }
@@ -21,11 +21,7 @@ const entityHandlers = {
 const reducer = combineReducers({
   entities: createReducer([], entityHandlers),
   meta: combineReducers({
-    read: createFetchMetaReducer({ types: [
-      types.CATEGORIES_REQUESTED,
-      types.CATEGORIES_REQUEST_SUCCEEDED,
-      types.CATEGORIES_REQUEST_FAILED
-    ] })
+    read: createFetchMetaReducer({ types: types.READ })
   })
 })
 
