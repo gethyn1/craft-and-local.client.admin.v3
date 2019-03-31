@@ -15,7 +15,7 @@ import * as types from './types'
  */
 
 const entityHandlers = {
-  [types.CATEGORY_REQUEST_SUCCEEDED]: (state, action) => {
+  [types.READ_CATEGORY_SUCCEEDED]: (state, action) => {
     return action.payload.category
   }
 }
@@ -25,28 +25,17 @@ const pendingEntityUpdatesHandlers = {
     ...state,
     ...action.payload
   }),
-  [types.CATEGORY_UPDATE_REQUEST_SUCCEEDED]: () => ({})
+  [types.UPDATE_CATEGORY_SUCCEEDED]: () => ({})
 }
 
 const reducer = combineReducers({
   entity: createReducer(null, entityHandlers),
   pendingEntityUpdates: createReducer({}, pendingEntityUpdatesHandlers),
   meta: combineReducers({
-    create: createFetchMetaReducer({ types: [
-      types.CATEGORY_CREATE_REQUESTED,
-      types.CATEGORY_CREATE_REQUEST_SUCCEEDED,
-      types.CATEGORY_CREATE_REQUEST_FAILED
-    ] }),
-    read: createFetchMetaReducer({ types: [
-      types.CATEGORY_REQUESTED,
-      types.CATEGORY_REQUEST_SUCCEEDED,
-      types.CATEGORY_REQUEST_FAILED
-    ] }),
-    update: createFetchMetaReducer({ types: [
-      types.CATEGORY_UPDATE_REQUESTED,
-      types.CATEGORY_UPDATE_REQUEST_SUCCEEDED,
-      types.CATEGORY_UPDATE_REQUEST_FAILED
-    ] })
+    create: createFetchMetaReducer({ types: types.CREATE }),
+    read: createFetchMetaReducer({ types: types.READ }),
+    update: createFetchMetaReducer({ types: types.UPDATE }),
+    remove: createFetchMetaReducer({ types: types.REMOVE })
   })
 })
 

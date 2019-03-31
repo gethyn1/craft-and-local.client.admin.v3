@@ -4,11 +4,7 @@ import * as types from './types'
 const fetchCategory = (id) => ({
   [CALL_API]: {
     endpoint: `/categories/${id}`,
-    types: [
-      types.CATEGORY_REQUESTED,
-      types.CATEGORY_REQUEST_SUCCEEDED,
-      types.CATEGORY_REQUEST_FAILED
-    ]
+    types: types.READ
   }
 })
 
@@ -23,11 +19,7 @@ const createCategory = ({ fields }) => ({
     endpoint: `/categories`,
     method: 'POST',
     body: fields,
-    types: [
-      types.CATEGORY_CREATE_REQUESTED,
-      types.CATEGORY_CREATE_REQUEST_SUCCEEDED,
-      types.CATEGORY_CREATE_REQUEST_FAILED
-    ],
+    types: types.CREATE,
     meta: {
       message: {
         loading: 'Creating category...',
@@ -44,11 +36,7 @@ const saveCategory = ({ id, fields }) => ({
     endpoint: `/categories/${id}`,
     method: 'POST',
     body: fields,
-    types: [
-      types.CATEGORY_UPDATE_REQUESTED,
-      types.CATEGORY_UPDATE_REQUEST_SUCCEEDED,
-      types.CATEGORY_UPDATE_REQUEST_FAILED
-    ],
+    types: types.UPDATE,
     meta: {
       message: {
         loading: 'Saving category...',
