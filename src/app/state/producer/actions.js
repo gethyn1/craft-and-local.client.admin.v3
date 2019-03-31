@@ -4,11 +4,7 @@ import * as types from './types'
 const fetchProducer = (id) => ({
   [CALL_API]: {
     endpoint: `/producers/${id}`,
-    types: [
-      types.PRODUCER_REQUESTED,
-      types.PRODUCER_REQUEST_SUCCEEDED,
-      types.PRODUCER_REQUEST_FAILED
-    ]
+    types: types.READ
   }
 })
 
@@ -23,11 +19,7 @@ const saveProducer = (id, body) => ({
     endpoint: `/producers/${id}`,
     method: 'POST',
     body,
-    types: [
-      types.PRODUCER_UPDATE_REQUESTED,
-      types.PRODUCER_UPDATE_REQUEST_SUCCEEDED,
-      types.PRODUCER_UPDATE_REQUEST_FAILED
-    ],
+    types: types.UPDATE,
     meta: {
       message: {
         loading: 'Saving producer...',
