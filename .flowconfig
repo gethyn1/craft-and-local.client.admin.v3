@@ -1,0 +1,16 @@
+[ignore]
+.*/node_modules/.*
+.*\.test\.js
+
+[include]
+/src
+
+[libs]
+
+[lints]
+
+[options]
+module.name_mapper='\(antd\)' -> '<PROJECT_ROOT>/flow/stub.js.flow'
+module.name_mapper='\(ramda\)' -> '<PROJECT_ROOT>/flow/stub.js.flow'
+
+[strict]

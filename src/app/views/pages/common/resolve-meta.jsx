@@ -1,6 +1,16 @@
+// @flow
+
 import React from 'react'
 import { path, pick, last, toPairs, find, head, compose } from 'ramda'
 import { Skeleton, Alert } from 'antd'
+
+type Meta = {
+  read: {
+    isLoading: boolean,
+    hasLoaded: boolean,
+    hasErrored: boolean
+  }
+}
 
 const READ_PATH = ['meta', 'read']
 const META_PROPS = ['isLoading', 'hasLoaded', 'hasErrored']
@@ -11,7 +21,7 @@ const pickMetaProps = pick(META_PROPS)
 
 const getActivePair = compose(find(last), toPairs)
 
-const getActiveProp = (meta) => {
+const getActiveProp = (meta: Meta) => {
   const activePair = getActivePair(meta)
   return activePair ? head(activePair) : null
 }
@@ -32,7 +42,11 @@ const mapComponentToState = ({ Component, Loading, Error }) => ({
   hasLoaded: Component
 })
 
-const resolveComponentByMetaState = (Component, Loading = Skeleton, Error = ErrorAlert) => (props) => {
+const resolveComponentByMetaState = (
+  Component,
+  Loading = Skeleton,
+  Error = ErrorAlert
+) => (props: Object) => {
   const readMetaProp = getReadPath(props)
 
   // TO DO: This should use type checking or monad to guard against invalid props or state
