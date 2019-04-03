@@ -11,7 +11,13 @@ const pickMetaProps = pick(META_PROPS)
 
 const getActivePair = compose(find(last), toPairs)
 
-const getActiveProp = (meta) => {
+type Meta = {
+  isLoading: boolean,
+  hasErrored: boolean,
+  hasLoaded: boolean
+}
+
+const getActiveProp = (meta: Meta) => {
   const activePair = getActivePair(meta)
   return activePair ? head(activePair) : null
 }
@@ -26,13 +32,17 @@ const ErrorAlert = () =>
     showIcon
   />
 
-const mapComponentToState = ({ Component, Loading, Error }) => ({
-  isLoading: Loading,
-  hasErrored: Error,
+const mapComponentToState = ({ Component, LoadingComponent, ErrorComponent }) => ({
+  isLoading: LoadingComponent,
+  hasErrored: ErrorComponent,
   hasLoaded: Component
 })
 
-const resolveComponentByMetaState = (Component, Loading = Skeleton, Error = ErrorAlert) => (props) => {
+const resolveComponentByMetaState = (
+  Component: React.ComponentType,
+  LoadingComponent: React.ComponentType = Skeleton,
+  ErrorComponent: React.ComponentType = ErrorAlert
+) => (props) => {
   const readMetaProp = getReadPath(props)
 
   // TO DO: This should use type checking or monad to guard against invalid props or state
@@ -43,7 +53,7 @@ const resolveComponentByMetaState = (Component, Loading = Skeleton, Error = Erro
 
   const state = getMetaState(readMetaProp)
 
-  const Resolved = mapComponentToState({ Component, Loading, Error })[state] || Component
+  const Resolved = mapComponentToState({ Component, LoadingComponent, ErrorComponent })[state] || Component
 
   return <Resolved {...props} />
 }
