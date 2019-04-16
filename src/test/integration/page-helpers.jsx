@@ -2,7 +2,7 @@ import React from 'react'
 import test from 'tape'
 import { mount } from 'enzyme'
 import { Categories, Category } from './page-objects'
-import { renderRoute } from '../../client/client'
+import { renderRoute } from '../../client'
 
 const MAX_FLUSHES_TO_WAIT_FOR = 10 // maximum number of callbacks to wait for chain to complete
 
