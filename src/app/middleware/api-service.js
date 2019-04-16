@@ -24,7 +24,7 @@ const apiService = (store) => (next) => (action) => {
 
   const hideLoadingMessage = loadingMessage ? message.loading(loadingMessage, 0) : () => {}
 
-  return window.fetch(
+  return fetch(
     `${API_BASE}${endpoint}`,
     {
       method: method || 'GET',

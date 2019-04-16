@@ -6,8 +6,9 @@
   "scripts": {
     "start:dev": "parcel -p 8080 src/client/index.html",
     "build": "parcel build src/client/index.js",
-    "test": "npm run test:lint && test:unit",
-    "test:unit": "babel-tape-runner -r './src/test/unit/setup' './src/**/*.test.@(js|jsx)'",
+    "test": "npm run test:lint && npm run test:unit && npm run test:integration",
+    "test:unit": "babel-tape-runner './src/app/**/*.test.@(js|jsx)' | tap-colorize",
+    "test:integration": "babel-tape-runner -r './src/test/integration/configure.js' './src/test/integration/*.integration.test.@(js|jsx)' | tap-colorize",
     "test:lint": "eslint src --ext .js,.jsx"
   },
   "author": "",
@@ -39,6 +40,8 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-standard": "^4.0.0",
+    "fetch-mock": "^7.3.1",
+    "jsdom": "^14.0.0",
     "parcel-bundler": "^1.12.3",
     "sinon": "^7.2.7",
     "tap-colorize": "^1.2.0",
