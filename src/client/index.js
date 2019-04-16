@@ -1,37 +1,7 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
-import { partial } from 'ramda'
-import { AppLayout } from '../app/views/layouts'
-import { store } from '../app/store'
-
-import { routes } from '../app/routes'
 import { history } from '../app/history'
-import { router } from '../app/router'
+import { renderRoute } from './client'
 
-const resolveRoute = partial(router.resolve, [routes])
+const renderAppByRoute = renderRoute()
 
-const Root = ({ RouteComponent }) => (
-  <Provider store={store}>
-    <AppLayout>
-      <RouteComponent />
-    </AppLayout>
-  </Provider>
-)
-
-const renderComponent = (component) =>
-  ReactDOM.render(
-    <Root RouteComponent={component} />,
-    document.getElementById('root')
-  )
-
-const render = (location) => {
-  try {
-    renderComponent(resolveRoute(location))
-  } catch (error) {
-    renderComponent(resolveRoute({ pathname: '/error' }))
-  }
-}
-
-render(location)
-history.listen(render)
+renderAppByRoute(location)
+history.listen(renderAppByRoute)
