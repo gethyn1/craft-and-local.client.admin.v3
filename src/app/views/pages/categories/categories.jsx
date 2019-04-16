@@ -7,18 +7,22 @@ const { Text } = Typography
 const Category = (category) => (
   <List.Item>
     <Text>
-      {category.title}<br />
-      <Link path={`/categories/${category._id}`}>Edit</Link>
+      <div data-testid="categories/category">
+        <span>{category.title}</span><br />
+        <Link path={`/categories/${category._id}`}>Edit</Link>
+      </div>
     </Text>
   </List.Item>
 )
 
 const Categories = ({ categories }) => {
   return (
-    <List
-      dataSource={categories}
-      renderItem={Category}
-    />
+    <div id="categories">
+      <List
+        dataSource={categories}
+        renderItem={Category}
+      />
+    </div>
   )
 }
 
