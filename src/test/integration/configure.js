@@ -53,4 +53,6 @@ window.fetch = () => {}
 // eslint-disable-next-line node/no-deprecated-api
 require.extensions['.scss'] = () => {}
 // eslint-disable-next-line node/no-deprecated-api
-require.extensions['.css'] = () => {}
+require.extensions['.less'] = () => {}
+// eslint-disable-next-line node/no-deprecated-api
+require.extensions['.css'] = (file) => {}
