@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "parcel -p 8080 src/client/index.html",
-    "build": "parcel build src/client/index.js",
+    "build": "parcel build src/client/index.html",
     "test": "npm run test:lint && npm run test:unit && npm run test:integration",
     "test:unit": "babel-tape-runner './src/app/**/*.test.@(js|jsx)' | tap-colorize",
     "test:integration": "babel-tape-runner -r './src/test/integration/configure.js' './src/test/integration/*.integration.test.@(js|jsx)' | tap-colorize",
