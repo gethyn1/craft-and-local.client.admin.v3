@@ -24,15 +24,19 @@ const renderComponent = (Component) =>
     document.getElementById('root')
   )
 
-const renderRoute = (renderFn = renderComponent) => (location) => {
-  const componentToRender = App.bind(null, { RouteComponent: resolveRoute(location) })
-  try {
-    return renderFn(componentToRender)
-  } catch (error) {
-    const errorRoot = App.bind(null, { RouteComponent: resolveRoute({ pathname: '/error' }) })
-    return renderFn(errorRoot)
-  }
-}
+const renderRoute = (renderFn = renderComponent) => (location) =>
+  resolveRoute(location).then((component) => {
+    const componentToRender = App.bind(null, { RouteComponent: component })
+
+    try {
+      return renderFn(componentToRender)
+    } catch (error) {
+      const errorRoot = App.bind(null, { RouteComponent: resolveRoute({ pathname: '/error' }) })
+      return renderFn(errorRoot)
+    }
+  }).catch((error) => {
+    console.log('Error resolving route:', error)
+  })
 
 export {
   renderRoute

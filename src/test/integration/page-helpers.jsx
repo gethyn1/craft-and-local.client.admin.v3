@@ -4,6 +4,8 @@ import { mount } from 'enzyme'
 import { Categories, Category } from './page-objects'
 import { renderRoute } from '../../client'
 
+// TODO: the setup for integration tests and handling of page objects is a bit messy and requires some tidying up
+
 const MAX_FLUSHES_TO_WAIT_FOR = 10 // maximum number of callbacks to wait for chain to complete
 
 const asyncFlush = () => new Promise(resolve => setTimeout(resolve, 0))
@@ -20,12 +22,20 @@ async function successFrom (checkerFunction) {
 
 class Pages {
   constructor (path) {
-    const dom = document.createElement('div')
-    const screen = renderRoute((Component) => {
-      return mount(<Component />, { attachTo: dom })
-    })({ pathname: path })
+    this.path = path
+  }
 
-    this.updatedScreen = () => screen.update()
+  async initialise () {
+    try {
+      const dom = document.createElement('div')
+      const screen = await renderRoute((Component) => {
+        return mount(<Component />, { attachTo: dom })
+      })({ pathname: this.path })
+
+      this.updatedScreen = () => screen.update()
+    } catch (error) {
+      console.log('Error initialising pages:', error)
+    }
   }
 
   async categoriesPage () {
@@ -41,9 +51,10 @@ class Pages {
   }
 }
 
-function integrationTest (name, path, callback) {
-  test(name, (t) => {
+async function integrationTest (name, path, callback) {
+  test(name, async (t) => {
     const app = new Pages(path)
+    await app.initialise()
     return callback(t, app)
   })
 }
