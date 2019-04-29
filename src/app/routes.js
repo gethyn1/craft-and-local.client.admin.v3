@@ -1,12 +1,7 @@
 import { store } from './store'
-import { Dashboard } from './views/pages/dashboard'
-import { Producers } from './views/pages/producers'
-import { Producer } from './views/pages/producer'
-import { Categories } from './views/pages/categories'
-import { Category } from './views/pages/category'
-import { Homepage } from './views/pages/homepage'
-import { NotFound } from './views/pages/not-found'
 import { producers, producer, categories, category } from './state'
+
+const handleImportError = (error) => console.log('Error importing route:', error)
 
 const routes = [
   {
@@ -17,21 +12,21 @@ const routes = [
         type: 'HOMEPAGE_ACTION'
       })
     },
-    component: Homepage
+    component: import('./views/pages/homepage').then(({ Homepage }) => Homepage, handleImportError)
   },
   {
     path: '/dashboard',
     action: () => {
       console.log('Dashboard route action')
     },
-    component: Dashboard
+    component: import('./views/pages/dashboard').then(({ Dashboard }) => Dashboard, handleImportError)
   },
   {
     path: '/producers',
     action: () => {
       store.dispatch(producers.actions.fetchProducers())
     },
-    component: Producers
+    component: import('./views/pages/producers').then(({ Producers }) => Producers, handleImportError)
   },
   {
     path: '/producers/:userId',
@@ -39,33 +34,33 @@ const routes = [
       store.dispatch(producer.actions.fetchProducer(match.userId))
       store.dispatch(categories.actions.fetchCategories())
     },
-    component: Producer
+    component: import('./views/pages/producer').then(({ Producer }) => Producer, handleImportError)
   },
   {
     path: '/categories',
     action: () => {
       store.dispatch(categories.actions.fetchCategories())
     },
-    component: Categories
+    component: import('./views/pages/categories').then(({ Categories }) => Categories, handleImportError)
   },
   {
     path: '/categories/create',
     action: () => {},
-    component: Category
+    component: import('./views/pages/category').then(({ Category }) => Category, handleImportError)
   },
   {
     path: '/categories/:id',
     action: ({ match }) => {
       store.dispatch(category.actions.fetchCategory(match.id))
     },
-    component: Category
+    component: import('./views/pages/category').then(({ Category }) => Category, handleImportError)
   },
   {
     path: '/error',
     action: () => {
       console.log('Error route action')
     },
-    component: NotFound
+    component: import('./views/pages/not-found').then(({ NotFound }) => NotFound, handleImportError)
   }
 ]
 
