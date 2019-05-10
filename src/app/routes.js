@@ -5,6 +5,11 @@ const handleImportError = (error) => console.log('Error importing route:', error
 
 const routes = [
   {
+    path: '/login',
+    action: () => {},
+    component: import('./views/pages/login').then(({ Login }) => Login, handleImportError)
+  },
+  {
     path: '/',
     action: () => {
       console.log('Homepage route action')
