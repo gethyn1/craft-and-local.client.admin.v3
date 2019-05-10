@@ -31,9 +31,12 @@ const apiService = (store) => (next) => (action) => {
       headers: {
         'Content-Type': 'application/json'
       },
+      mode: 'cors',
+      credentials: 'include',
       body: JSON.stringify(body)
     })
     .then((response) => {
+      console.log('Response status:', response.status)
       if (!response.ok) {
         throw new Error('Network response was not ok')
       }
