@@ -14,7 +14,7 @@
   "author": "",
   "license": "UNLICENSED",
   "dependencies": {
-    "antd": "^3.14.1",
+    "antd": "^3.17.0",
     "history": "^4.7.2",
     "path-to-regexp": "^3.0.0",
     "ramda": "^0.26.1",
