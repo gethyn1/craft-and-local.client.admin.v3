@@ -12,6 +12,7 @@ import * as types from './types'
  * }
  */
 
+// TODO don't add password to the store
 const entityHandlers = {
   [types.AUTHENTICATE_USER_SUCCEEDED]: (state, action) => {
     return action.payload.user

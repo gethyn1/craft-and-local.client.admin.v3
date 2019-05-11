@@ -46,9 +46,10 @@ const apiService = (store) => (next) => (action) => {
     .then((json) => {
       hideLoadingMessage()
       successMessage && message.success(successMessage)
-      return next({ type: successType, payload: json.data })
+      return next({ type: successType, payload: path(['data'], json) })
     })
-    .catch(() => {
+    .catch((error) => {
+      console.log(error)
       hideLoadingMessage()
       errorMessage && message.error(errorMessage)
       return next({ type: failureType, error: true })

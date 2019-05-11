@@ -14,12 +14,29 @@ const authenticateUser = (email, password) => ({
       message: {
         loading: 'Loading...',
         success: 'Logged in successfully!!',
-        error: 'Sorry .. there was an error'
+        error: 'Sorry .. there was an error authenticating'
+      }
+    }
+  }
+})
+
+// TODO clear all entity state on logout
+const logoutUser = () => ({
+  [CALL_API]: {
+    method: 'POST',
+    endpoint: '/authenticate/logout',
+    types: types.LOGOUT_USER,
+    meta: {
+      message: {
+        loading: 'Loading...',
+        success: 'Logged out successfully!!',
+        error: 'Sorry .. there was an error logging out'
       }
     }
   }
 })
 
 export {
-  authenticateUser
+  authenticateUser,
+  logoutUser
 }
