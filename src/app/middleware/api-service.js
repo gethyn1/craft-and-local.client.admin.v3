@@ -1,8 +1,20 @@
 import { message } from 'antd'
-import { path } from 'ramda'
+import { path, equals } from 'ramda'
+import { authenticated } from '../state'
 
 const API_BASE = 'http://localhost:5000'
 const CALL_API = 'CALL_API'
+const UNAUTHORISED = 401
+
+const handleStatusCode = (dispatch) => (response) => {
+  if (equals(response.status, UNAUTHORISED)) {
+    dispatch({
+      type: authenticated.types.UNAUTHENTICATED_ENDPOINT_REQUESTED
+    })
+  }
+
+  return Promise.resolve(response)
+}
 
 // TO DO: General tidy up and refactor
 // TO DO: test API service
@@ -35,6 +47,7 @@ const apiService = (store) => (next) => (action) => {
       credentials: 'include',
       body: JSON.stringify(body)
     })
+    .then(handleStatusCode(store.dispatch))
     .then((response) => {
       console.log('Response status:', response.status)
       if (!response.ok) {
@@ -58,5 +71,6 @@ const apiService = (store) => (next) => (action) => {
 
 export {
   CALL_API,
+  handleStatusCode,
   apiService
 }

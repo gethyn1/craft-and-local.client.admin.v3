@@ -19,6 +19,19 @@ test('Authentication service redirects to login when user logs out', (t) => {
   t.end()
 })
 
+test('Authentication service redirects to login on unauthenticated request', (t) => {
+  sinon.spy(history, 'push')
+  const next = sinon.spy()
+  const action = {
+    type: authenticated.types.UNAUTHENTICATED_ENDPOINT_REQUESTED
+  }
+  authenticationService(store)(next)(action)
+  t.equal(history.push.getCall(0).args[0], '/login', 'it redirects to login on unauthenticated request')
+  t.equal(next.calledWith(action), true, 'it calls next with action')
+  history.push.restore()
+  t.end()
+})
+
 test('Authentication service does not redirect on action', (t) => {
   sinon.spy(history, 'push')
   const next = sinon.spy()
