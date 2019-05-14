@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 import { createReducer, createCrudMetaReducer } from '../create-reducer'
 import * as types from './types'
+import * as authenticated from '../authenticated'
 
 /**
  * State shape
@@ -15,6 +16,9 @@ import * as types from './types'
 const entityHandlers = {
   [types.READ_CATEGORIES_SUCCEEDED]: (state, action) => {
     return action.payload.categories
+  },
+  [authenticated.types.UNAUTHENTICATED_ENDPOINT_REQUESTED]: () => {
+    return []
   }
 }
 
@@ -24,5 +28,6 @@ const reducer = combineReducers({
 })
 
 export {
+  entityHandlers,
   reducer
 }
