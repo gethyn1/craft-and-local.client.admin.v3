@@ -6,6 +6,7 @@ const API_BASE = 'http://localhost:5000'
 const CALL_API = 'CALL_API'
 const UNAUTHORISED = 401
 
+// TOD handle 500 and 404 response
 const handleStatusCode = (dispatch) => (response) => {
   if (equals(response.status, UNAUTHORISED)) {
     dispatch({
