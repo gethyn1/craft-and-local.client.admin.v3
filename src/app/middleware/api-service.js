@@ -1,12 +1,13 @@
 import { message } from 'antd'
 import { path, equals } from 'ramda'
+import { getCookie } from './cookies'
 import { authenticated } from '../state'
 
 const API_BASE = 'http://localhost:5000'
 const CALL_API = 'CALL_API'
 const UNAUTHORISED = 401
 
-// TOD handle 500 and 404 response
+// TODO handle 500 and 404 response
 const handleStatusCode = (dispatch) => (response) => {
   if (equals(response.status, UNAUTHORISED)) {
     dispatch({
@@ -17,8 +18,8 @@ const handleStatusCode = (dispatch) => (response) => {
   return Promise.resolve(response)
 }
 
-// TO DO: General tidy up and refactor
-// TO DO: test API service
+// TODO: General tidy up and refactor
+// TODO: test API service
 const apiService = (store) => (next) => (action) => {
   const apiType = action[CALL_API]
 
@@ -42,7 +43,8 @@ const apiService = (store) => (next) => (action) => {
     {
       method: method || 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'CSRF-Token': getCookie(document.cookie, 'XSRF-TOKEN')
       },
       mode: 'cors',
       credentials: 'include',

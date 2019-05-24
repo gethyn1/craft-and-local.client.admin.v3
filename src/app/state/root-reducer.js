@@ -10,6 +10,7 @@ const rootReducer = combineReducers({
   producer,
   categories,
   category,
+  // TODO: rename `authenticated` to `user`
   authenticated
 })
 

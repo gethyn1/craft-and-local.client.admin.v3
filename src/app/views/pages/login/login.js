@@ -4,12 +4,13 @@ import { WrappedLoginForm as LoginForm } from './login-form'
 
 const { Title } = Typography
 
+// TODO: stop page reload on failed login
 const Login = (props) => (
   <React.Fragment>
     <Title>Login</Title>
     <LoginForm
       onSubmit={props.onSubmit}
-      isLoading={props.meta.read.isLoading}
+      isLoading={props.authenticate.meta.read.isLoading}
     />
   </React.Fragment>
 )

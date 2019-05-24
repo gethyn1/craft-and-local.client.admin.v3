@@ -14,6 +14,7 @@ const isUnauthenticatedRequest = compose(
 
 const authenticationService = (store) => (next) => (action) => {
   if (isUnauthenticatedRequest(action)) {
+    store.dispatch(authenticated.actions.validateUser())
     history.push('/login', {})
   }
 

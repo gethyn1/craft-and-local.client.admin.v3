@@ -36,7 +36,22 @@ const logoutUser = () => ({
   }
 })
 
+const validateUser = () => ({
+  [CALL_API]: {
+    endpoint: '/authenticate/validate',
+    types: types.VALIDATE_USER
+  },
+  meta: {
+    message: {
+      loading: 'Validating user...',
+      success: 'Validated user successfully!!',
+      error: 'Sorry .. there was an error validating the user'
+    }
+  }
+})
+
 export {
   authenticateUser,
-  logoutUser
+  logoutUser,
+  validateUser
 }

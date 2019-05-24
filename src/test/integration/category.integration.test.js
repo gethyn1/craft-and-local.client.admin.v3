@@ -11,6 +11,7 @@ const category = {
 }
 
 test('Before', (t) => {
+  fetchMock.get('http://localhost:5000/authenticate/validate', {})
   fetchMock.get('http://localhost:5000/categories/1', { data: { category } })
   fetchMock.post('http://localhost:5000/categories/1', { data: { category } })
   t.pass('Setup mock category responses')
