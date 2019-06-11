@@ -21,7 +21,7 @@ const categories = [{
 }]
 
 test('Before', (t) => {
-  fetchMock.get('http://localhost:5000/authenticate/validate', {})
+  fetchMock.get('http://localhost:5000/authenticate/validate', { data: { isAuthenticated: true } })
   fetchMock.get('http://localhost:5000/categories', { data: { categories } })
   sinon.spy(history, 'push')
   t.pass('Setup mock categories responses')

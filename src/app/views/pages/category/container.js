@@ -22,6 +22,8 @@ const mapDispatchToProps = (dispatch) => ({
       : dispatch(category.actions.saveCategory({ id, fields }))
 })
 
+// TODO: simplify resolveComponentByMetaState so it can be used internally in component
+//       to avoid app layout flash on load
 const container = connect(mapStateToProps, mapDispatchToProps)(resolveComponentByMetaState(Category))
 
 export {

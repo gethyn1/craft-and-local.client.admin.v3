@@ -7,6 +7,7 @@ import * as types from './types'
  * {
  *   entities: Array,
  *   authenticate: {
+ *     isAuthenticated: boolean,
  *     meta: {
  *       read: Object<Fetch Meta>
  *     }
@@ -26,10 +27,29 @@ const entityHandlers = {
   }
 }
 
+const isAuthenticated = {
+  [types.AUTHENTICATE_USER_SUCCEEDED]: (state, action) => {
+    return true
+  },
+  [types.AUTHENTICATE_USER_REQUESTED]: (state, action) => {
+    return false
+  },
+  [types.AUTHENTICATE_USER_FAILED]: (state, action) => {
+    return false
+  },
+  [types.LOGOUT_USER_SUCCEEDED]: (state, action) => {
+    return false
+  },
+  [types.VALIDATE_USER_SUCCEEDED]: (state, action) => {
+    return action.payload.isAuthenticated
+  }
+}
+
 const reducer = combineReducers({
   entity: createReducer(null, entityHandlers),
   // TODO: refactor `createCrudMetaReducer` so validate does not require nested `meta.read` property
   authenticate: combineReducers({
+    isAuthenticated: createReducer(false, isAuthenticated),
     meta: createCrudMetaReducer({ read: types.AUTHENTICATE_USER })
   }),
   validate: combineReducers({

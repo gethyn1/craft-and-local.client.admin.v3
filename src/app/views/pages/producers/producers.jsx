@@ -1,5 +1,6 @@
 import React from 'react'
 import { List, Typography } from 'antd'
+import { AppLayout } from '../../layouts'
 import { Link } from '../../../components/link'
 
 const { Text } = Typography
@@ -15,10 +16,12 @@ const Producer = (producer) => (
 
 const Producers = ({ producers }) => {
   return (
-    <List
-      dataSource={producers}
-      renderItem={Producer}
-    />
+    <AppLayout>
+      <List
+        dataSource={producers}
+        renderItem={Producer}
+      />
+    </AppLayout>
   )
 }
 

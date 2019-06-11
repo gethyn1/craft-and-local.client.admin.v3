@@ -1,11 +1,12 @@
 import React from 'react'
 import { Typography } from 'antd'
+import { AppLayout } from '../../layouts'
 import { WrappedProducerForm as ProducerForm } from './producer-form'
 
 const { Title } = Typography
 
 const Producer = (props) => (
-  <React.Fragment>
+  <AppLayout>
     <Title>{props.entity.title}</Title>
     <ProducerForm
       producer={props.entity}
@@ -15,7 +16,7 @@ const Producer = (props) => (
       isUpdating={props.meta.update.isLoading}
       categories={props.categories}
     />
-  </React.Fragment>
+  </AppLayout>
 )
 
 export {

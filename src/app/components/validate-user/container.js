@@ -5,7 +5,8 @@ import { authenticated } from '../../state'
 const { shouldValidate } = authenticated.selectors
 
 const mapStateToProps = (state) => ({
-  shouldValidate: shouldValidate(state)
+  shouldValidate: shouldValidate(state),
+  isAuthenticated: state.authenticated.authenticate.isAuthenticated
 })
 
 const mapDispatchToProps = (dispatch) => ({

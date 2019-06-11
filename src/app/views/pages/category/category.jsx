@@ -1,11 +1,12 @@
 import React from 'react'
 import { Typography } from 'antd'
+import { AppLayout } from '../../layouts'
 import { WrappedCategoryForm as CategoryForm } from './category-form'
 
 const { Title } = Typography
 
 const Category = ({ title, category, pendingEntityUpdates, onFieldUpdate, onSubmit, meta }) => (
-  <React.Fragment>
+  <AppLayout>
     <Title>{title}</Title>
     <CategoryForm
       category={category}
@@ -14,7 +15,7 @@ const Category = ({ title, category, pendingEntityUpdates, onFieldUpdate, onSubm
       onSubmit={onSubmit}
       isUpdating={meta.update.isLoading || meta.create.isUpdating}
     />
-  </React.Fragment>
+  </AppLayout>
 )
 
 export {

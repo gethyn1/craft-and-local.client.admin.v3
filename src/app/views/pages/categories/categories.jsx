@@ -1,5 +1,6 @@
 import React from 'react'
 import { List, Typography } from 'antd'
+import { AppLayout } from '../../layouts'
 import { Link } from '../../../components/link'
 
 const { Text } = Typography
@@ -15,16 +16,16 @@ const Category = (category) => (
   </List.Item>
 )
 
-const Categories = ({ categories }) => {
-  return (
+const Categories = ({ categories }) => (
+  <AppLayout>
     <div id="categories">
       <List
         dataSource={categories}
         renderItem={Category}
       />
     </div>
-  )
-}
+  </AppLayout>
+)
 
 export {
   Categories

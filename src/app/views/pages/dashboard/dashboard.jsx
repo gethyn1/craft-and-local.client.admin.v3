@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from '../../../components/link'
+import { AppLayout } from '../../layouts'
 
 const Dashboard = () => {
   return (
-    <React.Fragment>
+    <AppLayout>
       <p>This is the dashboard <Link path="/">Go to homepage</Link></p>
-    </React.Fragment>
+    </AppLayout>
   )
 }
 

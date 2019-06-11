@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { partial } from 'ramda'
-import { AppLayout } from '../app/views/layouts'
 import { store } from '../app/store'
 import { ValidateUser } from '../app/components/validate-user'
 import { routes } from '../app/routes'
@@ -13,9 +12,7 @@ const resolveRoute = partial(router.resolve, [routes])
 const App = ({ RouteComponent }) => (
   <Provider store={store}>
     <ValidateUser>
-      <AppLayout>
-        <RouteComponent />
-      </AppLayout>
+      <RouteComponent />
     </ValidateUser>
   </Provider>
 )

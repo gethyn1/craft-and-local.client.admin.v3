@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
+import { Login } from '../../views/pages/login'
 
 // TOD: display error message if unable to validate user
-const ValidateUser = ({ validateUser, shouldValidate, children }) => {
+const ValidateUser = ({ validateUser, shouldValidate, isAuthenticated, children }) => {
   useEffect(() => {
     if (shouldValidate) {
       validateUser()
@@ -9,7 +10,9 @@ const ValidateUser = ({ validateUser, shouldValidate, children }) => {
   }, [validateUser, shouldValidate])
 
   return (
-    <React.Fragment>{children}</React.Fragment>
+    <React.Fragment>
+      {isAuthenticated ? children : <Login />}
+    </React.Fragment>
   )
 }
 
