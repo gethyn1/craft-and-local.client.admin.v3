@@ -8,8 +8,10 @@ const { Text } = Typography
 const Producer = (producer) => (
   <List.Item>
     <Text>
-      {producer.title}<br />
-      <Link path={`/producers/${producer.userId}`}>Edit</Link>
+      <div data-testid="producers/producer">
+        {producer.title}<br />
+        <Link path={`/producers/${producer.userId}`}>Edit</Link>
+      </div>
     </Text>
   </List.Item>
 )
