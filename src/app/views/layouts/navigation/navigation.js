@@ -7,7 +7,7 @@ const handleLogout = (onLogout) => (event) => {
   onLogout()
 }
 
-const Navigation = ({ onLogout }) => (
+const NavigationMenu = ({ onLogout }) => (
   <Menu
     theme="dark"
     mode="horizontal"
@@ -18,6 +18,9 @@ const Navigation = ({ onLogout }) => (
     <Menu.Item key="logout"><a href="/logout" onClick={handleLogout(onLogout)}>Logout</a></Menu.Item>
   </Menu>
 )
+
+const Navigation = ({ isAuthenticated, onLogout }) =>
+  isAuthenticated ? <NavigationMenu onLogout={onLogout} /> : null
 
 export {
   Navigation
