@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { path, isNil } from 'ramda'
 import { createReducer, createCrudMetaReducer } from '../create-reducer'
 import * as types from './types'
 
@@ -41,7 +42,8 @@ const isAuthenticated = {
     return false
   },
   [types.VALIDATE_USER_SUCCEEDED]: (state, action) => {
-    return action.payload.isAuthenticated
+    const isAuthenticated = path(['payload', 'isAuthenticated'], action)
+    return isNil(isAuthenticated) ? false : isAuthenticated
   }
 }
 
