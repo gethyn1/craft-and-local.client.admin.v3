@@ -1,13 +1,3 @@
-class Categories {
-  constructor (screen) {
-    this.updatedScreen = () => screen.update()
-  }
-
-  getCategories () {
-    return this.updatedScreen().find('[data-testid="categories/category"]')
-  }
-}
-
 class Category {
   constructor (screen) {
     this.updatedScreen = () => screen.update()
@@ -34,18 +24,6 @@ class Category {
   }
 }
 
-class Producers {
-  constructor (screen) {
-    this.updatedScreen = () => screen.update()
-  }
-
-  getProducers () {
-    return this.updatedScreen().find('[data-testid="producers/producer"]')
-  }
-}
-
 export {
-  Categories,
-  Category,
-  Producers
+  Category
 }
