@@ -1,6 +1,11 @@
 import React from 'react'
+import { AppLayout } from '../layouts'
 
-const NotFound = () => <p>404</p>
+const NotFound = () => (
+  <AppLayout>
+    <p>404</p>
+  </AppLayout>
+)
 
 export {
   NotFound
