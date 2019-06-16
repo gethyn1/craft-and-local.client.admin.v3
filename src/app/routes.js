@@ -34,6 +34,13 @@ const routes = [
     component: import('./views/pages/producers').then(({ Producers }) => Producers, handleImportError)
   },
   {
+    path: '/producers/create',
+    action: ({ match }) => {
+      store.dispatch(categories.actions.fetchCategories())
+    },
+    component: import('./views/pages/producer').then(({ Producer }) => Producer, handleImportError)
+  },
+  {
     path: '/producers/:userId',
     action: ({ match }) => {
       store.dispatch(producer.actions.fetchProducer(match.userId))

@@ -14,11 +14,28 @@ const updateField = (field) => ({
 })
 
 // TO DO: abstract CALL_API into factory action, or validate schema in API service
-const saveProducer = (id, body) => ({
+const createProducer = ({ fields }) => ({
   [CALL_API]: {
-    endpoint: `/producers/${id}`,
+    endpoint: `/producers`,
     method: 'POST',
-    body,
+    body: fields,
+    types: types.CREATE,
+    meta: {
+      message: {
+        loading: 'Creating producer...',
+        success: 'Producer created successfully!!',
+        error: 'Sorry .. there was an error creating the producer'
+      }
+    }
+  }
+})
+
+// TO DO: abstract CALL_API into factory action, or validate schema in API service
+const saveProducer = ({ userId, fields }) => ({
+  [CALL_API]: {
+    endpoint: `/producers/${userId}`,
+    method: 'POST',
+    body: fields,
     types: types.UPDATE,
     meta: {
       message: {
@@ -33,5 +50,6 @@ const saveProducer = (id, body) => ({
 export {
   fetchProducer,
   updateField,
+  createProducer,
   saveProducer
 }

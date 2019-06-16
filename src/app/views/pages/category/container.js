@@ -3,9 +3,7 @@ import { isNil } from 'ramda'
 import { Category } from './category'
 import { history } from '../../../history'
 import { category } from '../../../state'
-import { resolveComponentByMetaState } from '../common'
-
-const isCreatePage = location => location.pathname.includes('/create')
+import { resolveComponentByMetaState, isCreatePage } from '../common'
 
 const mapStateToProps = (state) => ({
   title: isCreatePage(history.location) ? 'Create category' : 'Edit category',

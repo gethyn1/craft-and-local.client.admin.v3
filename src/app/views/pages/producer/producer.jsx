@@ -7,9 +7,9 @@ const { Title } = Typography
 
 const Producer = (props) => (
   <AppLayout>
-    <Title>{props.entity.title}</Title>
+    <Title>{props.title}</Title>
     <ProducerForm
-      producer={props.entity}
+      producer={props.producer}
       updatedFields={props.pendingEntityUpdates}
       onFieldUpdate={props.onFieldUpdate}
       onSubmit={props.onSubmit}

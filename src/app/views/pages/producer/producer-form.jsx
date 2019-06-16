@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Input, Button } from 'antd'
+import { path } from 'ramda'
 import { Categories } from './categories'
 
 const { TextArea } = Input
@@ -9,10 +10,6 @@ const hasErrors = (fieldsError) => {
 }
 
 class ProducerForm extends React.Component {
-  componentDidMount () {
-    this.props.form.validateFields()
-  }
-
   onCategoryChange = (checkedValues) => {
     this.props.onFieldUpdate({
       categories: checkedValues
@@ -29,7 +26,10 @@ class ProducerForm extends React.Component {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        this.props.onSubmit(this.props.producer.userId, this.props.updatedFields)
+        this.props.onSubmit({
+          userId: path(['producer', 'userId'], this.props),
+          fields: path(['updatedFields'], this.props)
+        })
       }
     })
   }
@@ -45,7 +45,7 @@ class ProducerForm extends React.Component {
           {getFieldDecorator('title', {
             rules: [{ required: true, message: 'Title is required' }],
             onChange: this.handleChange,
-            initialValue: this.props.producer.title
+            initialValue: path(['producer', 'title'], this.props)
           })(
             <Input placeholder="Title" name="title" />
           )}
@@ -55,16 +55,16 @@ class ProducerForm extends React.Component {
           {getFieldDecorator('userId', {
             rules: [{ required: true, message: 'User ID is required' }],
             onChange: this.handleChange,
-            initialValue: this.props.producer.userId
+            initialValue: path(['producer', 'userId'], this.props)
           })(
-            <Input placeholder="Title" name="userId" />
+            <Input placeholder="User ID" name="userId" />
           )}
         </Form.Item>
 
         <Form.Item label="Description">
           {getFieldDecorator('description', {
             onChange: this.handleChange,
-            initialValue: this.props.producer.description
+            initialValue: path(['producer', 'description'], this.props)
           })(
             <TextArea placeholder="Description" name="description" rows={4} />
           )}
@@ -72,14 +72,14 @@ class ProducerForm extends React.Component {
 
         <Categories
           categories={this.props.categories}
-          defaultValue={this.props.producer.categories}
+          defaultValue={path(['producer', 'categories'], this.props)}
           onChange={this.onCategoryChange}
         />
 
         <Form.Item label="Instagram">
           {getFieldDecorator('instagramHandle', {
             onChange: this.handleChange,
-            initialValue: this.props.producer.instagramHandle
+            initialValue: path(['producer', 'instagramHandle'], this.props)
           })(
             <Input placeholder="Instagram" name="instagramHandle" />
           )}
@@ -88,7 +88,7 @@ class ProducerForm extends React.Component {
         <Form.Item label="Twitter">
           {getFieldDecorator('twitterHandle', {
             onChange: this.handleChange,
-            initialValue: this.props.producer.twitterHandle
+            initialValue: path(['producer', 'twitterHandle'], this.props)
           })(
             <Input placeholder="Twitter" name="twitterHandle" />
           )}

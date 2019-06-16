@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { Login } from '../../views/pages/login'
 
-// TOD: display error message if unable to validate user
+// TODO: display error message if unable to validate user
+// TODO: display loading message instead of login component while validating user
 const ValidateUser = ({ validateUser, shouldValidate, isAuthenticated, children }) => {
   useEffect(() => {
     if (shouldValidate) {
