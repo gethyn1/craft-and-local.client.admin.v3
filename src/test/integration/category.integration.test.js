@@ -5,15 +5,15 @@ import { integrationTest } from './page-helpers'
 const PATH = '/categories/1'
 
 const category = {
-  _id: '1',
+  id: '1',
   title: 'My category',
   slug: 'my-category'
 }
 
 test('Before', (t) => {
   fetchMock.get('http://localhost:5000/authenticate/validate', { data: { isAuthenticated: true } })
-  fetchMock.get('http://localhost:5000/categories/1', { data: { category } })
-  fetchMock.post('http://localhost:5000/categories/1', { data: { category } })
+  fetchMock.get('http://localhost:5000/categories/1', { data: category })
+  fetchMock.post('http://localhost:5000/categories/1', { data: category })
   t.pass('Setup mock category responses')
   t.end()
 })

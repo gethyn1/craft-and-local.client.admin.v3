@@ -14,9 +14,7 @@ test('Categories reducer sets entity on read success', (t) => {
   const categories = ['category 1', 'category 2']
 
   const action = {
-    payload: {
-      categories
-    }
+    payload: categories
   }
   const result = entityHandlers[types.READ_CATEGORIES_SUCCEEDED]([], action)
   const expected = categories

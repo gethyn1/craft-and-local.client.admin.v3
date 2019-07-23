@@ -14,9 +14,7 @@ test('Producer reducer sets entity on read success', (t) => {
   const producer = { title: 'producer 1' }
 
   const action = {
-    payload: {
-      producer
-    }
+    payload: producer
   }
   const result = entityHandlers[types.READ_PRODUCER_SUCCEEDED](undefined, action)
   const expected = producer

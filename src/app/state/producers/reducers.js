@@ -15,7 +15,7 @@ import * as authenticated from '../authenticated'
 
 const entityHandlers = {
   [types.READ_PRODUCERS_SUCCEEDED]: (state, action) => {
-    return action.payload.entities
+    return action.payload
   },
   [authenticated.types.UNAUTHENTICATED_ENDPOINT_REQUESTED]: () => {
     return []

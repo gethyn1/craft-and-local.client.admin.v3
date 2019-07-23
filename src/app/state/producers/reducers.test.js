@@ -14,9 +14,7 @@ test('Producers reducer sets entity on read success', (t) => {
   const producers = ['category 1', 'category 2']
 
   const action = {
-    payload: {
-      producers
-    }
+    payload: producers
   }
   const result = entityHandlers[types.READ_PRODUCERS_SUCCEEDED]([], action)
   const expected = producers

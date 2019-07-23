@@ -15,7 +15,7 @@ import * as authenticated from '../authenticated'
 
 const entityHandlers = {
   [types.READ_CATEGORIES_SUCCEEDED]: (state, action) => {
-    return action.payload.categories
+    return action.payload
   },
   [authenticated.types.UNAUTHENTICATED_ENDPOINT_REQUESTED]: () => {
     return []

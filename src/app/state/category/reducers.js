@@ -17,7 +17,7 @@ import * as authenticated from '../authenticated'
 
 const entityHandlers = {
   [types.READ_CATEGORY_SUCCEEDED]: (state, action) => {
-    return action.payload.category
+    return action.payload
   },
   [types.CATEGORY_RESET]: (state, action) => {
     return null

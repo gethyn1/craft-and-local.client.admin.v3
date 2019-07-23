@@ -26,7 +26,7 @@ class CategoryForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         this.props.onSubmit({
-          id: path(['category', '_id'], this.props),
+          id: path(['category', 'id'], this.props),
           fields: path(['updatedFields'], this.props)
         })
       }

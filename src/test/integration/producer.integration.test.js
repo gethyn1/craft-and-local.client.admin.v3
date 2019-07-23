@@ -5,7 +5,7 @@ import { integrationTest } from './page-helpers'
 const PATH = '/producers/producerone'
 
 const producer = {
-  _id: '1',
+  id: '1',
   categories: ['1'],
   instagramHandle: 'iamoninstagram',
   twitterHandle: 'iamontwitter',
@@ -15,20 +15,20 @@ const producer = {
 }
 
 const categories = [{
-  _id: '1',
+  id: '1',
   title: 'My category',
   slug: 'my-category'
 }, {
-  _id: '2',
+  id: '2',
   title: 'My other category',
   slug: 'my-other-category'
 }]
 
 test('Before', (t) => {
   fetchMock.get('http://localhost:5000/authenticate/validate', { data: { isAuthenticated: true } })
-  fetchMock.get('http://localhost:5000/categories', { data: { categories } })
-  fetchMock.get(`http://localhost:5000${PATH}`, { data: { producer } })
-  fetchMock.post(`http://localhost:5000${PATH}`, { data: { producer } })
+  fetchMock.get('http://localhost:5000/categories', { data: categories })
+  fetchMock.get(`http://localhost:5000${PATH}`, { data: producer })
+  fetchMock.post(`http://localhost:5000${PATH}`, { data: producer })
   t.pass('Setup mock producer responses')
   t.end()
 })

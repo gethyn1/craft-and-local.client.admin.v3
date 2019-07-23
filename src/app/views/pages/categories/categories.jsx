@@ -10,7 +10,7 @@ const Category = (category) => (
     <Text>
       <div data-testid="categories/category">
         <span>{category.title}</span><br />
-        <Link path={`/categories/${category._id}`}>Edit</Link>
+        <Link path={`/categories/${category.id}`}>Edit</Link>
       </div>
     </Text>
   </List.Item>

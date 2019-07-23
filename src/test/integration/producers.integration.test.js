@@ -7,22 +7,22 @@ import { history } from '../../app/history'
 const PATH = '/producers'
 
 const producers = [{
-  _id: '1',
+  id: '1',
   title: 'First producer',
   userId: 'firstproducer'
 }, {
-  _id: '2',
+  id: '2',
   title: 'Second producer',
   userId: 'secondproducer'
 }, {
-  _id: '3',
+  id: '3',
   title: 'Third producer',
   userId: 'thirdproducer'
 }]
 
 test('Before', (t) => {
   fetchMock.get('http://localhost:5000/authenticate/validate', { data: { isAuthenticated: true } })
-  fetchMock.get('http://localhost:5000/producers', { data: { producers } })
+  fetchMock.get('http://localhost:5000/producers', { data: producers })
   sinon.spy(history, 'push')
   t.pass('Setup mock producers responses')
   t.end()
