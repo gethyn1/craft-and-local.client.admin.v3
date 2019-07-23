@@ -37,7 +37,6 @@ class LocationForm extends React.Component {
   render () {
     const { getFieldDecorator, getFieldsError, getFieldError } = this.props.form
     const titleError = getFieldError('title')
-    const userIdError = getFieldError('userId')
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -48,16 +47,6 @@ class LocationForm extends React.Component {
             initialValue: path(['location', 'title'], this.props)
           })(
             <Input placeholder="Title" name="title" />
-          )}
-        </Form.Item>
-
-        <Form.Item label="User ID" validateStatus={userIdError ? 'error' : ''} help={userIdError || ''}>
-          {getFieldDecorator('userId', {
-            rules: [{ required: true, message: 'User ID is required' }],
-            onChange: this.handleChange,
-            initialValue: path(['location', 'userId'], this.props)
-          })(
-            <Input placeholder="User ID" name="userId" />
           )}
         </Form.Item>
 
