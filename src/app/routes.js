@@ -34,6 +34,14 @@ const routes = [
     component: import('./views/pages/locations').then(({ Locations }) => Locations, handleImportError)
   },
   {
+    path: '/locations/create',
+    action: ({ match }) => {
+      store.dispatch(location.actions.resetLocation())
+      store.dispatch(categories.actions.fetchCategories())
+    },
+    component: import('./views/pages/location').then(({ Location }) => Location, handleImportError)
+  },
+  {
     path: '/locations/:id',
     action: ({ match }) => {
       store.dispatch(location.actions.fetchLocation(match.id))
