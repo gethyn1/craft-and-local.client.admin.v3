@@ -1,5 +1,5 @@
 import { store } from './store'
-import { locations, producers, producer, categories, category } from './state'
+import { locations, location, producers, producer, categories, category } from './state'
 
 const handleImportError = (error) => console.log('Error importing route:', error)
 
@@ -32,6 +32,14 @@ const routes = [
       store.dispatch(locations.actions.fetchLocations())
     },
     component: import('./views/pages/locations').then(({ Locations }) => Locations, handleImportError)
+  },
+  {
+    path: '/locations/:id',
+    action: ({ match }) => {
+      store.dispatch(location.actions.fetchLocation(match.id))
+      store.dispatch(categories.actions.fetchCategories())
+    },
+    component: import('./views/pages/location').then(({ Location }) => Location, handleImportError)
   },
   {
     path: '/producers',
