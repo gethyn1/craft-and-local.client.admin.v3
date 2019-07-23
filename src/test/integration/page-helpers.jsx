@@ -1,7 +1,7 @@
 import React from 'react'
 import test from 'tape'
 import { mount } from 'enzyme'
-import { Locations, Categories, Category, Producers, Producer } from './page-objects'
+import { Locations, Location, Categories, Category, Producers, Producer } from './page-objects'
 import { renderRoute } from '../../client'
 
 // TODO: the setup for integration tests and handling of page objects is a bit messy and requires some tidying up
@@ -66,6 +66,12 @@ class Pages {
     const locations = new Locations(this.updatedScreen())
     await successFrom(() => locations.getLocations().length > 0)
     return locations
+  }
+
+  async locationPage () {
+    const location = new Location(this.updatedScreen())
+    await successFrom(() => location.getTitleField().length > 0)
+    return location
   }
 }
 

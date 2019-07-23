@@ -1,4 +1,5 @@
 export { Locations } from './locations'
+export { Location } from './location'
 export { Producer } from './producer'
 export { Producers } from './producers'
 export { Category } from './category'
