@@ -22,6 +22,23 @@ class Location {
   getDescriptionField () {
     return this.updatedScreen().find('textarea[name="description"]')
   }
+
+  getEmailField () {
+    return this.getField('email')
+  }
+
+  getWebsiteField () {
+    return this.getField('website')
+  }
+
+  getTelephoneField () {
+    return this.getField('telephone')
+  }
+
+  getAliasField () {
+    return this.getField('alias')
+  }
+
   getCategoryCheckboxByValue (value) {
     return this.updatedScreen().find(`input[type="checkbox"][value="${value}"]`)
   }

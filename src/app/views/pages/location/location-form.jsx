@@ -35,8 +35,9 @@ class LocationForm extends React.Component {
   }
 
   render () {
-    const { getFieldDecorator, getFieldsError, getFieldError } = this.props.form
+    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form
     const titleError = getFieldError('title')
+    const emailError = isFieldTouched('email') && getFieldError('email')
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -47,6 +48,15 @@ class LocationForm extends React.Component {
             initialValue: path(['location', 'title'], this.props)
           })(
             <Input placeholder="Title" name="title" />
+          )}
+        </Form.Item>
+
+        <Form.Item label="Alias" extra="Use this to differentiate between similar locations">
+          {getFieldDecorator('alias', {
+            onChange: this.handleChange,
+            initialValue: path(['location', 'alias'], this.props)
+          })(
+            <Input placeholder="Alias" name="alias" />
           )}
         </Form.Item>
 
@@ -65,7 +75,7 @@ class LocationForm extends React.Component {
           onChange={this.onCategoryChange}
         />
 
-        <Form.Item label="Instagram">
+        <Form.Item label="Instagram" extra="Just the username, not the URL">
           {getFieldDecorator('instagramHandle', {
             onChange: this.handleChange,
             initialValue: path(['location', 'instagramHandle'], this.props)
@@ -74,12 +84,40 @@ class LocationForm extends React.Component {
           )}
         </Form.Item>
 
-        <Form.Item label="Twitter">
+        <Form.Item label="Twitter" extra="Just the username, not the URL">
           {getFieldDecorator('twitterHandle', {
             onChange: this.handleChange,
             initialValue: path(['location', 'twitterHandle'], this.props)
           })(
             <Input placeholder="Twitter" name="twitterHandle" />
+          )}
+        </Form.Item>
+
+        <Form.Item label="Email address" validateStatus={emailError ? 'error' : ''} help={emailError || ''}>
+          {getFieldDecorator('email', {
+            rules: [{ type: 'email', message: 'Enter a valid email address' }],
+            onChange: this.handleChange,
+            initialValue: path(['location', 'email'], this.props)
+          })(
+            <Input placeholder="Email address" name="email" />
+          )}
+        </Form.Item>
+
+        <Form.Item label="Website">
+          {getFieldDecorator('website', {
+            onChange: this.handleChange,
+            initialValue: path(['location', 'website'], this.props)
+          })(
+            <Input placeholder="Website" name="website" />
+          )}
+        </Form.Item>
+
+        <Form.Item label="Telephone">
+          {getFieldDecorator('telephone', {
+            onChange: this.handleChange,
+            initialValue: path(['location', 'telephone'], this.props)
+          })(
+            <Input placeholder="Telephone" name="telephone" />
           )}
         </Form.Item>
 
