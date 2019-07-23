@@ -36,6 +36,7 @@ const routes = [
   {
     path: '/producers/create',
     action: ({ match }) => {
+      store.dispatch(producer.actions.resetProducer())
       store.dispatch(categories.actions.fetchCategories())
     },
     component: import('./views/pages/producer').then(({ Producer }) => Producer, handleImportError)
@@ -57,7 +58,9 @@ const routes = [
   },
   {
     path: '/categories/create',
-    action: () => {},
+    action: () => {
+      store.dispatch(category.actions.resetCategory())
+    },
     component: import('./views/pages/category').then(({ Category }) => Category, handleImportError)
   },
   {

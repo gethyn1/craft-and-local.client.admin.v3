@@ -47,9 +47,14 @@ const saveProducer = ({ userId, fields }) => ({
   }
 })
 
+const resetProducer = () => ({
+  type: types.PRODUCER_RESET
+})
+
 export {
   fetchProducer,
   updateField,
   createProducer,
-  saveProducer
+  saveProducer,
+  resetProducer
 }

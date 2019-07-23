@@ -13,6 +13,10 @@ const updateField = (field) => ({
   payload: field
 })
 
+const resetCategory = () => ({
+  type: types.CATEGORY_RESET
+})
+
 // TO DO: abstract CALL_API into factory action, or validate schema in API service
 const createCategory = ({ fields }) => ({
   [CALL_API]: {
@@ -50,6 +54,7 @@ const saveCategory = ({ id, fields }) => ({
 export {
   fetchCategory,
   updateField,
+  resetCategory,
   createCategory,
   saveCategory
 }

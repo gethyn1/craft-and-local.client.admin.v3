@@ -19,6 +19,9 @@ const entityHandlers = {
   [types.READ_CATEGORY_SUCCEEDED]: (state, action) => {
     return action.payload.category
   },
+  [types.CATEGORY_RESET]: (state, action) => {
+    return null
+  },
   [authenticated.types.UNAUTHENTICATED_ENDPOINT_REQUESTED]: () => {
     return null
   }
