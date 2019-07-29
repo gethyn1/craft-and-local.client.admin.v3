@@ -18,6 +18,19 @@ const handleStatusCode = (dispatch) => (response) => {
   return Promise.resolve(response)
 }
 
+const transformResponse = (json, adapter = path(['data'])) => adapter(json)
+
+const buildRequestBody = ({ method, body, unauthenticatedRequest }) => ({
+  method: method || 'GET',
+  headers: {
+    ...(!unauthenticatedRequest && { 'Content-Type': 'application/json' }),
+    ...(!unauthenticatedRequest && { 'CSRF-Token': getCookie(document.cookie, 'XSRF-TOKEN') })
+  },
+  mode: 'cors',
+  ...(!unauthenticatedRequest && { credentials: 'include' }),
+  body: JSON.stringify(body)
+})
+
 // TODO: General tidy up and refactor
 // TODO: test API service
 const apiService = (store) => (next) => (action) => {
@@ -27,7 +40,7 @@ const apiService = (store) => (next) => (action) => {
     return next(action)
   }
 
-  const { types, endpoint, method, body, meta } = apiType
+  const { types, endpoint, meta, url, adapter } = apiType
   const [requestType, successType, failureType] = types
 
   const loadingMessage = path(['message', 'loading'], meta)
@@ -38,18 +51,9 @@ const apiService = (store) => (next) => (action) => {
 
   const hideLoadingMessage = loadingMessage ? message.loading(loadingMessage, 0) : () => {}
 
-  return fetch(
-    `${API_BASE}${endpoint}`,
-    {
-      method: method || 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'CSRF-Token': getCookie(document.cookie, 'XSRF-TOKEN')
-      },
-      mode: 'cors',
-      credentials: 'include',
-      body: JSON.stringify(body)
-    })
+  const requestUrl = url || `${API_BASE}${endpoint}`
+
+  return fetch(requestUrl, buildRequestBody(apiType))
     .then(handleStatusCode(store.dispatch))
     .then((response) => {
       console.log('Response status:', response.status)
@@ -62,7 +66,7 @@ const apiService = (store) => (next) => (action) => {
     .then((json) => {
       hideLoadingMessage()
       successMessage && message.success(successMessage)
-      return next({ type: successType, payload: path(['data'], json) })
+      return next({ type: successType, payload: transformResponse(json, adapter) })
     })
     .catch((error) => {
       console.log(error)
@@ -75,5 +79,6 @@ const apiService = (store) => (next) => (action) => {
 export {
   CALL_API,
   handleStatusCode,
-  apiService
+  apiService,
+  buildRequestBody
 }
