@@ -6,6 +6,7 @@ import { reducer as producer } from './producer'
 import { reducer as categories } from './categories'
 import { reducer as category } from './category'
 import { reducer as authenticated } from './authenticated'
+import { reducer as geocoding } from './geocoding'
 
 const rootReducer = combineReducers({
   locations,
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   categories,
   category,
   // TODO: rename `authenticated` to `user`
-  authenticated
+  authenticated,
+  geocoding
 })
 
 export {
