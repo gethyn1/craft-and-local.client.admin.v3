@@ -1,9 +1,10 @@
 import React from 'react'
-import { Form, Input, Button } from 'antd'
+import { Form, Input, Button, AutoComplete } from 'antd'
 import { path } from 'ramda'
 import { Categories } from './categories'
 
 const { TextArea } = Input
+const { Option } = AutoComplete
 
 const hasErrors = (fieldsError) => {
   return Object.keys(fieldsError).some(field => fieldsError[field])
@@ -20,6 +21,21 @@ class LocationForm extends React.Component {
     this.props.onFieldUpdate({
       [e.target.name]: e.target.value
     })
+  }
+
+  handleAddressLookupChange = (value) => {
+    this.props.onAddressChange(value)
+    this.props.onFieldUpdate({
+      address: value
+    })
+  }
+
+  handleAddressLookupSelect = (value) => {
+    const option = this.props.addressLookupOptions.find(option => option.address === value)
+    this.props.onFieldUpdate({
+      coordinates: [option.lng, option.lat]
+    })
+    this.handleAddressLookupChange(value)
   }
 
   handleSubmit = (e) => {
@@ -48,6 +64,17 @@ class LocationForm extends React.Component {
             initialValue: path(['location', 'title'], this.props)
           })(
             <Input placeholder="Title" name="title" />
+          )}
+        </Form.Item>
+
+        <Form.Item label="Address" extra="start entering an address">
+          {getFieldDecorator('address', {
+            onChange: this.handleAddressLookupChange,
+            initialValue: path(['location', 'address'], this.props)
+          })(
+            <AutoComplete placeholder="Address" onSelect={this.handleAddressLookupSelect}>
+              {this.props.addressLookupOptions.map(option => <Option key={option.id}>{option.address}</Option>)}
+            </AutoComplete>
           )}
         </Form.Item>
 

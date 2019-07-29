@@ -36,6 +36,7 @@ test('Before', (t) => {
   t.end()
 })
 
+// TO DO: mock address lookup to allow integration testing of address lookup
 integrationTest('View and edit location page', PATH, async (t, app) => {
   try {
     const locationPage = await app.locationPage()

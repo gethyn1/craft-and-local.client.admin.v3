@@ -15,6 +15,8 @@ const Location = (props) => (
       onSubmit={props.onSubmit}
       isUpdating={props.meta.update.isLoading}
       categories={props.categories}
+      addressLookupOptions={props.addressLookupOptions}
+      onAddressChange={props.onAddressChange}
     />
   </AppLayout>
 )
