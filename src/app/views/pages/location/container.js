@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { isNil } from 'ramda'
 import { Location } from './location'
-import { location } from '../../../state'
+import { location, geocoding } from '../../../state'
 import { history } from '../../../history'
 import { resolveComponentByMetaState, isCreatePage } from '../common'
 
@@ -11,7 +11,8 @@ const mapStateToProps = (state) => ({
   pendingEntityUpdates: state.location.pendingEntityUpdates,
   meta: state.location.meta,
   // TO DO: use a selector to get entities
-  categories: state.categories.entities
+  categories: state.categories.entities,
+  addressLookupOptions: state.geocoding.entities
 })
 
 const mapDispatchToProps = (dispatch) => ({
@@ -19,7 +20,8 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmit: ({ id, fields }) =>
     isNil(id)
       ? dispatch(location.actions.createLocation({ fields }))
-      : dispatch(location.actions.saveLocation({ id, fields }))
+      : dispatch(location.actions.saveLocation({ id, fields })),
+  onAddressChange: (address) => dispatch(geocoding.actions.fetchAdressLookupOptions(address))
 })
 
 // TODO: simplify resolveComponentByMetaState so it can be used internally in component
