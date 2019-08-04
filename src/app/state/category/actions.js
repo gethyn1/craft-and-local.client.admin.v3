@@ -51,10 +51,28 @@ const saveCategory = ({ id, fields }) => ({
   }
 })
 
+// TO DO: abstract CALL_API into factory action, or validate schema in API service
+const deleteCategory = (id) => ({
+  [CALL_API]: {
+    endpoint: `/categories/${id}`,
+    method: 'DELETE',
+    body: { id },
+    types: types.REMOVE,
+    meta: {
+      message: {
+        loading: 'Deleting category...',
+        success: 'Category deleted successfully!!',
+        error: 'Sorry .. there was an error deleting the category'
+      }
+    }
+  }
+})
+
 export {
   fetchCategory,
   updateField,
   resetCategory,
   createCategory,
-  saveCategory
+  saveCategory,
+  deleteCategory
 }

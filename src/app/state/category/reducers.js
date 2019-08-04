@@ -10,7 +10,8 @@ import * as authenticated from '../authenticated'
  *   pendingEntityUpdates: Object,
  *   meta: {
  *     read: Object<Fetch Meta>,
- *     update: Object<Fetch Meta>
+ *     update: Object<Fetch Meta>,
+ *     remove: Object<Fetch Meta>
  *   }
  * }
  */
