@@ -4,7 +4,7 @@ class Categories {
   }
 
   getCategories () {
-    return this.updatedScreen().find('[data-testid="categories/category"]')
+    return this.updatedScreen().find('li[data-testid="categories/category"]')
   }
 }
 
