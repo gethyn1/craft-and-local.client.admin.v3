@@ -4,7 +4,7 @@ class Locations {
   }
 
   getLocations () {
-    return this.updatedScreen().find('[data-testid="locations/location"]')
+    return this.updatedScreen().find('li[data-testid="entity-list/location"]')
   }
 }
 

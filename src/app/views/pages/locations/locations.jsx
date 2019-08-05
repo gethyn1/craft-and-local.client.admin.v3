@@ -1,28 +1,21 @@
 import React from 'react'
-import { List, Typography } from 'antd'
 import { AppLayout } from '../../layouts'
-import { Link } from '../../../components/link'
+import { EntityList } from '../../../components/entity-list'
 
-const { Text } = Typography
+const getLocationDescription = location => location.address
 
-const Location = (location) => (
-  <List.Item>
-    <Text>
-      <div data-testid="locations/location">
-        {location.title}<br />
-        <Link path={`/locations/${location.id}`}>Edit</Link>
-      </div>
-    </Text>
-  </List.Item>
-)
-
-const Locations = ({ locations }) => {
+const Locations = ({ locations, deleteLocation }) => {
   return (
     <AppLayout>
-      <List
-        dataSource={locations}
-        renderItem={Location}
-      />
+      <div id="locations">
+        <EntityList
+          entities={locations}
+          onDeleteEntity={deleteLocation}
+          entityType="location"
+          path="locations"
+          getDescription={getLocationDescription}
+        />
+      </div>
     </AppLayout>
   )
 }

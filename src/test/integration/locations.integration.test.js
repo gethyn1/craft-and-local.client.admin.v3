@@ -20,6 +20,7 @@ const locations = [{
 test('Before', (t) => {
   fetchMock.get('http://localhost:5000/authenticate/validate', { data: { isAuthenticated: true } })
   fetchMock.get('http://localhost:5000/locations', { data: locations })
+  fetchMock.delete('http://localhost:5000/locations/1', { data: locations[0] })
   sinon.spy(history, 'push')
   t.pass('Setup mock locations responses')
   t.end()
@@ -28,15 +29,24 @@ test('Before', (t) => {
 integrationTest('View list of locations', PATH, async (t, app) => {
   try {
     const locationsPage = await app.locationsPage()
-    const locations = locationsPage.getLocations()
-    const location = locations.first()
+    let locations = locationsPage.getLocations()
+    let location = locations.first()
 
-    location.find('a').simulate('click')
-
+    /* Edit location */
+    location.find('a[href="/locations/1"]').simulate('click')
     t.equal(fetchMock.called(/locations/), true, 'it calls the locations endpoint')
     t.equal(locations.length, 3, 'it renders the correct number of locations')
     t.equal(location.text().includes('First location'), true, 'it renders a location title')
     t.equal(history.push.getCall(0).args[0], '/locations/1', 'it calls the location endpoint on location click')
+
+    /* Delete location */
+    location.find('a[href="/delete"]').simulate('click')
+    locations = locationsPage.getLocations()
+    location = locations.first()
+    location.find('button.ant-btn-primary').first().simulate('click')
+    // TO DO: not updating locations after delete
+    // locations = locationsPage.getLocations()
+    // t.equal(locations.length, 2, 'deletes location')
     t.end()
   } catch (error) {
     t.fail('Locations page integration test failed:', error)
