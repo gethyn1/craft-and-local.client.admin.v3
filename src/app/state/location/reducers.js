@@ -10,20 +10,23 @@ import * as authenticated from '../authenticated'
  *   pendingEntityUpdates: Object,
  *   meta: {
  *     read: Object<Fetch Meta>,
- *     update: Object<Fetch Meta>
+ *     update: Object<Fetch Meta>,
+ *     remove: Object<Fetch Meta>
  *   }
  * }
  */
+
+const INITIAL_STATE = null
 
 const entityHandlers = {
   [types.READ_LOCATION_SUCCEEDED]: (state, action) => {
     return action.payload
   },
   [types.LOCATION_RESET]: (state, action) => {
-    return null
+    return INITIAL_STATE
   },
   [authenticated.types.UNAUTHENTICATED_ENDPOINT_REQUESTED]: () => {
-    return null
+    return INITIAL_STATE
   }
 }
 
@@ -36,7 +39,7 @@ const pendingEntityUpdatesHandlers = {
 }
 
 const reducer = combineReducers({
-  entity: createReducer(null, entityHandlers),
+  entity: createReducer(INITIAL_STATE, entityHandlers),
   pendingEntityUpdates: createReducer({}, pendingEntityUpdatesHandlers),
   meta: createCrudMetaReducer({
     read: types.READ,

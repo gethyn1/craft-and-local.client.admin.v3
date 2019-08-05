@@ -47,6 +47,23 @@ const saveLocation = ({ id, fields }) => ({
   }
 })
 
+// TO DO: abstract CALL_API into factory action, or validate schema in API service
+const deleteLocation = (id) => ({
+  [CALL_API]: {
+    endpoint: `/locations/${id}`,
+    method: 'DELETE',
+    body: { id },
+    types: types.REMOVE,
+    meta: {
+      message: {
+        loading: 'Deleting location...',
+        success: 'Location deleted successfully!!',
+        error: 'Sorry .. there was an error deleting the location'
+      }
+    }
+  }
+})
+
 const resetLocation = () => ({
   type: types.LOCATION_RESET
 })
@@ -56,5 +73,6 @@ export {
   updateField,
   createLocation,
   saveLocation,
+  deleteLocation,
   resetLocation
 }

@@ -16,15 +16,17 @@ import * as authenticated from '../authenticated'
  * }
  */
 
+const INITIAL_STATE = null
+
 const entityHandlers = {
   [types.READ_CATEGORY_SUCCEEDED]: (state, action) => {
     return action.payload
   },
   [types.CATEGORY_RESET]: (state, action) => {
-    return null
+    return INITIAL_STATE
   },
   [authenticated.types.UNAUTHENTICATED_ENDPOINT_REQUESTED]: () => {
-    return null
+    return INITIAL_STATE
   }
 }
 
@@ -37,7 +39,7 @@ const pendingEntityUpdatesHandlers = {
 }
 
 const reducer = combineReducers({
-  entity: createReducer(null, entityHandlers),
+  entity: createReducer(INITIAL_STATE, entityHandlers),
   pendingEntityUpdates: createReducer({}, pendingEntityUpdatesHandlers),
   meta: createCrudMetaReducer({
     create: types.CREATE,
