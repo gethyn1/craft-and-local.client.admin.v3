@@ -31,7 +31,7 @@ class LocationForm extends React.Component {
   }
 
   handleAddressLookupSelect = (value) => {
-    const option = this.props.addressLookupOptions.find(option => option.id === value)
+    const option = this.props.addressLookupOptions.find(option => option.address === value)
     this.props.onFieldUpdate({
       coordinates: [option.lng, option.lat]
     })
@@ -73,7 +73,7 @@ class LocationForm extends React.Component {
             initialValue: path(['location', 'address'], this.props)
           })(
             <AutoComplete placeholder="Address" onSelect={this.handleAddressLookupSelect}>
-              {this.props.addressLookupOptions.map(option => <Option key={option.id} value={option.id}>{option.address}</Option>)}
+              {this.props.addressLookupOptions.map(option => <Option key={option.id} value={option.address}>{option.address}</Option>)}
             </AutoComplete>
           )}
         </Form.Item>
