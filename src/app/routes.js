@@ -10,23 +10,6 @@ const routes = [
     component: import('./views/pages/login').then(({ Login }) => Login, handleImportError)
   },
   {
-    path: '/',
-    action: () => {
-      console.log('Homepage route action')
-      store.dispatch({
-        type: 'HOMEPAGE_ACTION'
-      })
-    },
-    component: import('./views/pages/homepage').then(({ Homepage }) => Homepage, handleImportError)
-  },
-  {
-    path: '/dashboard',
-    action: () => {
-      console.log('Dashboard route action')
-    },
-    component: import('./views/pages/dashboard').then(({ Dashboard }) => Dashboard, handleImportError)
-  },
-  {
     path: '/locations',
     action: () => {
       store.dispatch(locations.actions.fetchLocations())
