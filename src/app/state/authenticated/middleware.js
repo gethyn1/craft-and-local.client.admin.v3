@@ -1,11 +1,8 @@
-import { __, includes } from 'ramda'
 import { history } from '../../history'
-import { AUTHENTICATE_USER_SUCCEEDED, VALIDATE_USER_SUCCEEDED } from './types'
-
-const isAuthenticatedType = includes(__, [AUTHENTICATE_USER_SUCCEEDED, VALIDATE_USER_SUCCEEDED])
+import { AUTHENTICATE_USER_SUCCEEDED } from './types'
 
 const handleLogin = (store) => (next) => (action) => {
-  if (isAuthenticatedType(action.type)) {
+  if (action.type === AUTHENTICATE_USER_SUCCEEDED) {
     history.push('/locations', {})
   }
 
