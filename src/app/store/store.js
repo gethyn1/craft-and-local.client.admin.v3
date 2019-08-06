@@ -1,8 +1,12 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { apiService, authenticationService } from '../middleware'
-import { rootReducer, category, location } from '../state'
+import { authenticated, rootReducer, category, location } from '../state'
 
-const stateMiddleware = [...category.middleware, ...location.middleware]
+const stateMiddleware = [
+  ...authenticated.middleware,
+  ...category.middleware,
+  ...location.middleware
+]
 
 const preloadedState = {}
 

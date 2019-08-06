@@ -40,7 +40,7 @@ integrationTest('View list of categories', PATH, async (t, app) => {
     t.equal(fetchMock.called(/categories/), true, 'it calls the categories endpoint')
     t.equal(categories.length, 3, 'it renders the correct number of categories')
     t.equal(category.text().includes('My category'), true, 'it renders a category title')
-    t.equal(history.push.getCall(0).args[0], '/categories/1', 'it calls the category endpoint on category click')
+    t.equal(history.push.getCall(1).args[0], '/categories/1', 'it calls the category endpoint on category click')
 
     /* Delete category */
     category.find('a[href="/delete"]').simulate('click')
