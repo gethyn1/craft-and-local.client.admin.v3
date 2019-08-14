@@ -3,7 +3,7 @@ import { path, equals } from 'ramda'
 import { getCookie } from './cookies'
 import { authenticated } from '../state'
 
-const API_BASE = 'http://localhost:5000'
+const API_BASE = process.env.API_BASE_URL
 const CALL_API = 'CALL_API'
 const UNAUTHORISED = 401
 
