@@ -1,5 +1,5 @@
 import { message } from 'antd'
-import { path, equals } from 'ramda'
+import { path, equals, prop } from 'ramda'
 import { getCookie } from './cookies'
 import { authenticated } from '../state'
 
@@ -64,6 +64,10 @@ const apiService = (store) => (next) => (action) => {
       return response.json()
     })
     .then((json) => {
+      const errors = prop('errors', json)
+      if (errors) {
+        throw new Error(JSON.stringify(errors))
+      }
       hideLoadingMessage()
       successMessage && message.success(successMessage)
       return next({ type: successType, payload: transformResponse(json, adapter) })
