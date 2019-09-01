@@ -6,7 +6,7 @@ import * as authenticated from '../authenticated'
 /**
  * State shape
  * {
- *   entity: Array,
+ *   entity: Object<Location>,
  *   pendingEntityUpdates: Object,
  *   meta: {
  *     read: Object<Fetch Meta>,

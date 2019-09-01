@@ -7,7 +7,7 @@ import * as location from '../location'
 /**
  * State shape
  * {
- *   entities: Array,
+ *   entities: Array<Location>,
  *   meta: {
  *     read: Object<Fetch Meta>
  *   }
