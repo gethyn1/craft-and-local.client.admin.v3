@@ -35,7 +35,8 @@ const pendingEntityUpdatesHandlers = {
     ...state,
     ...action.payload
   }),
-  [types.UPDATE_LOCATION_SUCCEEDED]: () => ({})
+  [types.UPDATE_LOCATION_SUCCEEDED]: () => ({}),
+  [types.LOCATION_RESET]: (state, action) => ({})
 }
 
 const reducer = combineReducers({

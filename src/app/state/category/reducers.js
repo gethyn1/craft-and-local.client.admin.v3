@@ -35,7 +35,8 @@ const pendingEntityUpdatesHandlers = {
     ...state,
     ...action.payload
   }),
-  [types.UPDATE_CATEGORY_SUCCEEDED]: () => ({})
+  [types.UPDATE_CATEGORY_SUCCEEDED]: () => ({}),
+  [types.CATEGORY_RESET]: () => ({})
 }
 
 const reducer = combineReducers({
