@@ -54,6 +54,7 @@ class LocationForm extends React.Component {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form
     const titleError = getFieldError('title')
     const emailError = isFieldTouched('email') && getFieldError('email')
+    const websiteError = isFieldTouched('website') && getFieldError('website')
 
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -130,8 +131,9 @@ class LocationForm extends React.Component {
           )}
         </Form.Item>
 
-        <Form.Item label="Website">
+        <Form.Item label="Website" validateStatus={websiteError ? 'error' : ''} help={websiteError || ''}>
           {getFieldDecorator('website', {
+            rules: [{ type: 'url', message: 'Enter a valid URL' }],
             onChange: this.handleChange,
             initialValue: path(['location', 'website'], this.props)
           })(
