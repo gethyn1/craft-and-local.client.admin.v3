@@ -53,6 +53,7 @@ class LocationForm extends React.Component {
   render () {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form
     const titleError = getFieldError('title')
+    const addressError = getFieldError('address')
     const emailError = isFieldTouched('email') && getFieldError('email')
     const websiteError = isFieldTouched('website') && getFieldError('website')
 
@@ -68,8 +69,9 @@ class LocationForm extends React.Component {
           )}
         </Form.Item>
 
-        <Form.Item label="Address" extra="start entering an address">
+        <Form.Item label="Address" extra="start entering an address" validateStatus={addressError ? 'error' : ''} help={addressError || ''}>
           {getFieldDecorator('address', {
+            rules: [{ required: true, message: 'Address is required' }],
             onChange: this.handleAddressLookupChange,
             initialValue: path(['location', 'address'], this.props)
           })(
